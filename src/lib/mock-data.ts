@@ -3,8 +3,8 @@ export const mockMessages = [
         id: "1",
         user: {
             id: "user1",
-            name: "ArT",
-            avatar: "/placeholder.svg?height=40&width=40",
+            name: "FalleN",
+            avatar: "/players/fallen.webp",
             isModerator: true,
         },
         content: "Welcome to the FURIA fan chat! The match against Liquid starts in 15 minutes.",
@@ -15,7 +15,7 @@ export const mockMessages = [
         user: {
             id: "user2",
             name: "CSGOFan123",
-            avatar: "/placeholder.svg?height=40&width=40",
+            avatar: "",
             isModerator: false,
         },
         content: "So excited for this match! FURIA has been on fire lately.",
@@ -26,7 +26,7 @@ export const mockMessages = [
         user: {
             id: "user3",
             name: "BrazilCS",
-            avatar: "/placeholder.svg?height=40&width=40",
+            avatar: "",
             isModerator: false,
         },
         content: "I think KSCERATO is going to pop off today.",
@@ -37,7 +37,7 @@ export const mockMessages = [
         user: {
             id: "user4",
             name: "FURIASupporter",
-            avatar: "/placeholder.svg?height=40&width=40",
+            avatar: "",
             isModerator: false,
         },
         content: "What map do you think they'll pick first?",
@@ -48,7 +48,7 @@ export const mockMessages = [
         user: {
             id: "user5",
             name: "TacticalCS",
-            avatar: "/placeholder.svg?height=40&width=40",
+            avatar: "",
             isModerator: false,
         },
         content: "Probably Mirage or Inferno. They've been strong on both lately.",
@@ -58,8 +58,8 @@ export const mockMessages = [
         id: "6",
         user: {
             id: "user1",
-            name: "ArT",
-            avatar: "/placeholder.svg?height=40&width=40",
+            name: "FalleN",
+            avatar: "/players/fallen.webp",
             isModerator: true,
         },
         content: "The teams are now in the server. Match will start shortly!",
