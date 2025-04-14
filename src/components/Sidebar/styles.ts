@@ -28,12 +28,21 @@ const SidebarHeader = styled.div`
     border-bottom: 1px solid rgba(212, 175, 55, 0.1);
 `;
 
-const Logo = styled.div`
+const Logo = styled.img`
+    width: 2.4rem;
+    height: 2.4rem;
+`;
+
+const Text = styled.div`
     font-family: 'Space Mono', monospace;
     font-size: 1.5rem;
     font-weight: bold;
     color: ${({ theme }) => theme.colors.primary};
     letter-spacing: 0.1em;
+
+    span {
+        color: ${({ theme }) => theme.colors.accent};
+    }
 `;
 
 const CloseButton = styled.button`
@@ -115,6 +124,7 @@ export {
     SidebarContainer,
     SidebarHeader,
     Logo,
+    Text,
     CloseButton,
     NavList,
     NavItem,

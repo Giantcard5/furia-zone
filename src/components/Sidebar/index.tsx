@@ -37,7 +37,8 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         <>
             <S.SidebarContainer isOpen={isOpen}>
                 <S.SidebarHeader>
-                    <S.Logo>FURIA</S.Logo>
+                    <S.Logo src='/icon-gold.png' alt='FURIA' />
+                    <S.Text>FURIA <span>ZONE</span></S.Text>
                     <S.CloseButton onClick={onClose} aria-label='Close sidebar'>
                         <X size={24} />
                     </S.CloseButton>
