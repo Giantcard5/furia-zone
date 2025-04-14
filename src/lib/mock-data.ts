@@ -264,7 +264,7 @@ export const mockHighlights = [
 
 export const mockTeamData = {
     name: "FURIA",
-    logo: "/placeholder.svg?height=160&width=160",
+    logo: "/icon-gold.png",
     description:
         "FURIA Esports is a Brazilian professional esports organization founded in 2017. Their CS:GO team has become one of the top teams in the world, known for their aggressive playstyle and innovative strategies.",
     stats: [
@@ -279,42 +279,49 @@ export const mockTeamData = {
             name: "Gabriel Toledo",
             nickname: "FalleN",
             role: "AWPer",
-            image: "/placeholder.svg?height=180&width=150",
+            image: "/players/fallen.webp",
         },
         {
             id: "player-2",
             name: "Kaike Cerato",
             nickname: "KSCERATO",
             role: "In-game Leader",
-            image: "/placeholder.svg?height=180&width=150",
+            image: "/players/kscerato.webp",
         },
         {
             id: "player-3",
             name: "Yuri Santos",
             nickname: "yuurih",
             role: "Rifler",
-            image: "/placeholder.svg?height=180&width=150",
+            image: "/players/yuurih.webp",
         },
         {
             id: "player-4",
             name: "Felipe Medeiros",
             nickname: "skullz",
             role: "Support",
-            image: "/placeholder.svg?height=180&width=150",
+            image: "/players/skullz.webp",
         },
         {
             id: "player-5",
             name: "Danil Golubenko",
             nickname: "molody",
             role: "AWPer",
-            image: "/placeholder.svg?height=180&width=150",
+            image: "/players/molody.webp",
         },
         {
             id: "player-6",
             name: "Marcelo Cespedes",
             nickname: "chelo",
             role: "Bench",
-            image: "/placeholder.svg?height=180&width=150",
+            image: "/players/chelo.webp",
+        },
+        {
+            id: "player-7",
+            name: "Sid Macedo",
+            nickname: "sidde",
+            role: "Coach",
+            image: "/players/sidde.webp",
         },
     ],
 };

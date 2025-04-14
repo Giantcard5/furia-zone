@@ -72,7 +72,7 @@ const FeaturesGrid = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
-    margin-top: 4rem;
+    margin: 4rem 0;
     width: 100%;
     max-width: 1200px;
     
@@ -124,10 +124,7 @@ const FeatureDescription = styled.p`
 `;
 
 const TournamentInfo = styled.div`
-    position: absolute;
-    bottom: 2rem;
-    left: 0;
-    right: 0;
+    margin: 0 0 2rem 0;
     text-align: center;
     font-family: 'Space Mono', monospace;
     font-size: 0.875rem;
@@ -140,10 +137,18 @@ const TournamentInfo = styled.div`
 `;
 
 const CrownIcon = styled.div`
-    width: 40px;
-    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 8rem;
+    height: 8rem;
     margin: 0 auto 1rem;
-    opacity: 0.8;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
 `;
 
 export {
