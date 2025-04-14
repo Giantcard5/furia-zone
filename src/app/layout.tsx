@@ -7,7 +7,7 @@ import {
 } from '@/provider/ThemeProvider';
 
 export const metadata: Metadata = {
-    title: "FURIA CS:GO Fan Platform",
+    title: "FURIA ZONE | CS:GO Fan Platform",
     description: "Connect with other FURIA fans and follow live matches"
 };
 
@@ -25,6 +25,7 @@ export default function RootLayout({
                     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
                     rel="stylesheet"
                 />
+                <link rel="icon" href="/icon-black.png" />
             </head>
             <body>
                 <ThemeProvider>
