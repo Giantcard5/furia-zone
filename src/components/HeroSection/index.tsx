@@ -27,6 +27,10 @@ export function HeroSection() {
             description: 'Access detailed profiles of all FURIA players and team statistics from past tournaments.',
         },
         {
+            title: 'UPCOMING MATCHES',
+            description: 'Stay updated with FURIA’s upcoming matches, including dates, times, and opponents.',
+        },
+        {
             title: 'FAQ BOT',
             description: 'Get quick answers to your questions about FURIA and upcoming matches at the Major.',
         },
@@ -61,11 +65,11 @@ export function HeroSection() {
                 ))}
             </S.FeaturesGrid>
 
-            <S.TournamentInfo>
-                <span>FURIA</span> | COPYRIGHT © 2025
-            </S.TournamentInfo>
-
             <Sponsor />
+
+            <S.TournamentInfo>
+                FURIA <span>|</span> COPYRIGHT © 2025
+            </S.TournamentInfo>
         </S.HeroContainer>
     );
 };

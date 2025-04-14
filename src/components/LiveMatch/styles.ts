@@ -112,28 +112,6 @@ const Tab = styled.button<{ isActive: boolean }>`
     }
 `;
 
-const SectionTitle = styled.h2`
-    font-size: 1.5rem;
-    font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-    font-family: 'Space Mono', monospace;
-    letter-spacing: 0.1em;
-    color: ${({ theme }) => theme.colors.primary};
-    display: flex;
-    align-items: center;
-    
-    &::before {
-        content: '';
-        display: inline-block;
-        width: 4px;
-        height: 24px;
-        background-color: ${({ theme }) => theme.colors.primary};
-        margin-right: 0.75rem;
-    }
-`;
-
 const TournamentBadge = styled.div`
     position: absolute;
     top: -10px;
@@ -173,7 +151,6 @@ export {
     MatchInfo,
     TabsContainer,
     Tab,
-    SectionTitle,
     TournamentBadge,
     CrownIcon
 };

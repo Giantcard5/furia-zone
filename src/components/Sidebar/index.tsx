@@ -12,7 +12,8 @@ import {
     MessageSquare,
     Trophy,
     Users,
-    HelpCircle
+    HelpCircle,
+    Calendar
 } from 'lucide-react';
 
 import * as S from './styles';
@@ -30,6 +31,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         { path: '/live-match', label: 'LIVE MATCH', icon: <Trophy size={18} /> },
         { path: '/chat', label: 'FAN CHAT', icon: <MessageSquare size={18} /> },
         { path: '/team-info', label: 'TEAM INFO', icon: <Users size={18} /> },
+        { path: '/upcoming-matches', label: 'UPCOMING MATCHES', icon: <Calendar size={18} /> },
         { path: '/faq-bot', label: 'FAQ BOT', icon: <HelpCircle size={18} /> },
     ];
 

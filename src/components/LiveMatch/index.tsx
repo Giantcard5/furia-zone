@@ -58,11 +58,6 @@ export function LiveMatchStatus() {
                 {activeTab === 'player-stats' && <PlayerStats matchData={mockMatchData} />}
                 {activeTab === 'highlights' && <GameHighlights />}
             </div>
-
-            <div>
-                <S.SectionTitle>UPCOMING MATCHES</S.SectionTitle>
-                <UpcomingMatches />
-            </div>
         </S.MatchContainer>
     );
 };

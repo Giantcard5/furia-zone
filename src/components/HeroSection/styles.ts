@@ -81,7 +81,7 @@ const FeaturesGrid = styled.div`
     }
     
     @media (min-width: 1024px) {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
     }
 `;
 
@@ -124,7 +124,6 @@ const FeatureDescription = styled.p`
 `;
 
 const TournamentInfo = styled.div`
-    margin: 0 0 2rem 0;
     text-align: center;
     font-family: 'Space Mono', monospace;
     font-size: 0.875rem;
