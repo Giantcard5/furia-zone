@@ -44,7 +44,7 @@ export function HeroSection() {
                 Connect with other FURIA fans, follow live matches, and get the latest updates about your favorite CS:GO team.
             </S.HeroSubtitle>
 
-            <Link href='/live-match' passHref legacyBehavior>
+            <Link href='/live-match' passHref>
                 <S.CTAButton>
                     CHECK LIVE MATCH <ArrowRight size={18} />
                 </S.CTAButton>
@@ -63,5 +63,5 @@ export function HeroSection() {
                 <span>FURIA</span> | COPYRIGHT © 2025
             </S.TournamentInfo>
         </S.HeroContainer>
-    )
-}
+    );
+};
