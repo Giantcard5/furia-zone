@@ -363,3 +363,108 @@ export const mockBotResponses = [
         response: "Hello! I'm the FURIA FAQ Bot. How can I help you with information about the FURIA CS:GO team today?",
     },
 ];
+
+export const mockUpcomingMatches = [
+    {
+        id: "upcoming-1",
+        team1: {
+            name: "FURIA",
+            logo: "/icon-black.png",
+        },
+        team2: {
+            name: "Liquid",
+            logo: "/placeholder.svg?height=60&width=60",
+        },
+        date: "APR 16",
+        fullDate: "April 16, 2024",
+        time: "15:00 CEST",
+        tournament: "PGL Major Copenhagen 2024",
+        matchType: "BO3",
+        location: "Copenhagen, Denmark",
+    },
+    {
+        id: "upcoming-2",
+        team1: {
+            name: "FURIA",
+            logo: "/icon-black.png",
+        },
+        team2: {
+            name: "Complexity",
+            logo: "/placeholder.svg?height=60&width=60",
+        },
+        date: "APR 18",
+        fullDate: "April 18, 2024",
+        time: "18:30 CEST",
+        tournament: "PGL Major Copenhagen 2024",
+        matchType: "BO3",
+        location: "Copenhagen, Denmark",
+    },
+    {
+        id: "upcoming-3",
+        team1: {
+            name: "NAVI",
+            logo: "/placeholder.svg?height=60&width=60",
+        },
+        team2: {
+            name: "FURIA",
+            logo: "/icon-black.png",
+        },
+        date: "APR 20",
+        fullDate: "April 20, 2024",
+        time: "12:00 CEST",
+        tournament: "PGL Major Copenhagen 2024",
+        matchType: "BO3",
+        location: "Copenhagen, Denmark",
+    },
+    {
+        id: "upcoming-4",
+        team1: {
+            name: "FURIA",
+            logo: "/icon-black.png",
+        },
+        team2: {
+            name: "G2",
+            logo: "/placeholder.svg?height=60&width=60",
+        },
+        date: "APR 22",
+        fullDate: "April 22, 2024",
+        time: "20:00 CEST",
+        tournament: "PGL Major Copenhagen 2024",
+        matchType: "BO3",
+        location: "Copenhagen, Denmark",
+    },
+    {
+        id: "upcoming-5",
+        team1: {
+            name: "MOUZ",
+            logo: "/placeholder.svg?height=60&width=60",
+        },
+        team2: {
+            name: "FURIA",
+            logo: "/icon-black.png",
+        },
+        date: "APR 25",
+        fullDate: "April 25, 2024",
+        time: "16:45 CEST",
+        tournament: "PGL Major Copenhagen 2024",
+        matchType: "BO3",
+        location: "Copenhagen, Denmark",
+    },
+    {
+        id: "upcoming-6",
+        team1: {
+            name: "FURIA",
+            logo: "/icon-black.png",
+        },
+        team2: {
+            name: "FaZe",
+            logo: "/placeholder.svg?height=60&width=60",
+        },
+        date: "APR 28",
+        fullDate: "April 28, 2024",
+        time: "19:15 CEST",
+        tournament: "PGL Major Copenhagen 2024",
+        matchType: "BO3",
+        location: "Copenhagen, Denmark",
+    },
+];
