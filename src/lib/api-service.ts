@@ -35,26 +35,7 @@ export const apiService = {
         return fetchApi(`/teams/${teamId}`);
     },
 
-    getLiveMatch: async () => {
-        return fetchApi('/matches/live');
-    },
-
-    getUpcomingMatches: async () => {
-        return fetchApi('/matches/upcoming');
-    },
-
-    getChatMessages: async (roomId: string) => {
-        return fetchApi(`/chat/${roomId}/messages`);
-    },
-
-    sendChatMessage: async (roomId: string, message: string) => {
-        return fetchApi(`/chat/${roomId}/messages`, {
-            method: 'POST',
-            body: JSON.stringify({ message }),
-        });
-    },
-
-    getUserProfile: async (userId: string) => {
-        return fetchApi(`/users/${userId}`);
+    getPlayerData: async (playerId: string) => {
+        return fetchApi(`/players/${playerId}`);
     },
 }; 

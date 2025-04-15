@@ -16,46 +16,71 @@ import {
 
 import * as S from './styles';
 
-import {
-    getImageFromName
-} from '@/utils/image';
-
 interface TeamData {
-    id: number;
-    name: string;
-    logo: string;
-    players: Array<{
+    players: {
         id: number;
         nickname: string;
         name: string;
         type: string;
-    }>;
-    stats: {
-        matches: number;
-        wins: number;
-        losses: number;
-        winRate: number;
+    }[];
+}
+
+interface PlayerData {
+    id: number;
+    name: string;
+    ign: string;
+    image: string;
+    type: string;
+    statistics: {
+        rating: number;
+        killsPerRound: number | null;
+        headshots: number | null;
+        mapsPlayed: number | null;
+        deathsPerRound: number | null;
+        roundsContributed: number | null;
     };
+}
+
+interface ApiResponse<T> {
+    data: T;
+    error?: string;
 }
 
 export function TeamInfo() {
     const { name, logo, stats, description } = mockTeamData;
 
     const [teamData, setTeamData] = useState<TeamData | null>(null);
+    const [playersData, setPlayersData] = useState<PlayerData[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function fetchTeamData() {
             try {
                 setLoading(true);
-
                 const response = await apiService.getTeamData('8297');
-
+                
                 if (response.error) {
                     throw new Error(response.error);
                 };
 
-                setTeamData(response.data as TeamData);
+                const teamData = response.data as TeamData;
+                setTeamData(teamData);
+                
+                if (teamData?.players) {
+                    const playerPromises = teamData.players.map((player: { id: number; type: string }) => 
+                        apiService.getPlayerData(player.id.toString()) as Promise<ApiResponse<PlayerData>>
+                    );
+                    
+                    const playerResponses = await Promise.all(playerPromises);
+                    const validPlayerData = playerResponses
+                        .filter(response => !response.error)
+                        .map((response, index) => ({
+                            ...response.data,
+                            type: teamData.players[index].type
+                        }));
+                    
+                    setPlayersData(validPlayerData);
+                };
             } catch (err) {
                 console.error('Error fetching team data:', err);
             } finally {
@@ -107,16 +132,16 @@ export function TeamInfo() {
                 <S.SectionTitle>PLAYERS</S.SectionTitle>
                 <S.PlayersGrid>
                     {loading ? (
-                        Array(5).fill(0).map((_, index) => (
+                        Array(6).fill(0).map((_, index) => (
                             <S.PlayerCardLoading key={index} />
                         ))
                     ) : (
-                        teamData?.players.map((player) => (
+                        playersData.map((player) => (
                             <S.PlayerCard key={player.id}>
                                 <S.PlayerHeader>
                                     <S.PlayerImage>
                                         <Image
-                                            src={getImageFromName[player.name as keyof typeof getImageFromName]}
+                                            src={player.image}
                                             alt={player.name}
                                             fill
                                             style={{ objectFit: 'contain' }}
@@ -125,7 +150,7 @@ export function TeamInfo() {
                                 </S.PlayerHeader>
                                 <S.PlayerInfo>
                                     <S.PlayerName>{player.name}</S.PlayerName>
-                                    <S.PlayerNickname>{player.nickname}</S.PlayerNickname>
+                                    <S.PlayerNickname>{player.ign}</S.PlayerNickname>
                                     <S.PlayerRole>{player.type}</S.PlayerRole>
                                 </S.PlayerInfo>
                             </S.PlayerCard>

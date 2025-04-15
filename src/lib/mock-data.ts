@@ -307,7 +307,7 @@ export const mockTeamData = {
             name: "Danil Golubenko",
             nickname: "molody",
             role: "AWPer",
-            image: "/players/molody.webp",
+            image: "/players/molodoy.webp",
         },
         {
             id: "player-6",
