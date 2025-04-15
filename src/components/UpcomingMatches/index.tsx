@@ -49,7 +49,7 @@ export function UpcomingMatches() {
                                 <S.TeamDisplay>
                                     <S.TeamLogo>
                                         <Image
-                                            src={match.team1.logo || '/placeholder.svg?height=60&width=60'}
+                                            src={match.team1.logo || 'https://www.hltv.org/img/static/team/placeholder.svg'}
                                             alt={match.team1.name}
                                             fill
                                             style={{ objectFit: 'contain' }}
@@ -70,7 +70,7 @@ export function UpcomingMatches() {
                                 <S.TeamDisplay>
                                     <S.TeamLogo>
                                         <Image
-                                            src={match.team2.logo || '/placeholder.svg?height=60&width=60'}
+                                            src={match.team2.logo || 'https://www.hltv.org/img/static/team/placeholder.svg'}
                                             alt={match.team2.name}
                                             fill
                                             style={{ objectFit: 'contain' }}

@@ -47,7 +47,7 @@ export function MatchScoreboard({ matchData }: MatchScoreboardProps) {
                 <S.TeamSection isLeft={true}>
                     <S.TeamLogo>
                         <Image
-                            src={team1.logo || '/placeholder.svg?height=120&width=120'}
+                            src={team1.logo || 'https://www.hltv.org/img/static/team/placeholder.svg'}
                             alt={team1.name}
                             fill
                             style={{ objectFit: 'contain' }}
@@ -64,7 +64,7 @@ export function MatchScoreboard({ matchData }: MatchScoreboardProps) {
                 <S.TeamSection>
                     <S.TeamLogo>
                         <Image
-                            src={team2.logo || '/placeholder.svg?height=120&width=120'}
+                            src={team2.logo || 'https://www.hltv.org/img/static/team/placeholder.svg'}
                             alt={team2.name}
                             fill
                             style={{ objectFit: 'contain' }}

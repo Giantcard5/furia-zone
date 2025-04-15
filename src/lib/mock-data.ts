@@ -73,14 +73,14 @@ export const mockMatchData = {
         {
             id: "team-1",
             name: "FURIA",
-            logo: "/placeholder.svg?height=120&width=120",
+            logo: "https://www.hltv.org/img/static/team/placeholder.svg",
             score: 12,
             players: [
                 {
                     id: "player-1",
                     name: "Andrei Piovezan",
                     nickname: "arT",
-                    avatar: "/placeholder.svg?height=40&width=40",
+                    avatar: "https://static.hltv.org/images/playerprofile/bodyshot/unknown.png",
                     stats: {
                         kills: 18,
                         deaths: 14,
@@ -93,7 +93,7 @@ export const mockMatchData = {
                     id: "player-2",
                     name: "Kaike Cerato",
                     nickname: "KSCERATO",
-                    avatar: "/placeholder.svg?height=40&width=40",
+                    avatar: "https://static.hltv.org/images/playerprofile/bodyshot/unknown.png",
                     stats: {
                         kills: 22,
                         deaths: 10,
@@ -106,7 +106,7 @@ export const mockMatchData = {
                     id: "player-3",
                     name: "Yuri Santos",
                     nickname: "yuurih",
-                    avatar: "/placeholder.svg?height=40&width=40",
+                    avatar: "https://static.hltv.org/images/playerprofile/bodyshot/unknown.png",
                     stats: {
                         kills: 19,
                         deaths: 12,
@@ -119,7 +119,7 @@ export const mockMatchData = {
                     id: "player-4",
                     name: "André Abreu",
                     nickname: "drop",
-                    avatar: "/placeholder.svg?height=40&width=40",
+                    avatar: "https://static.hltv.org/images/playerprofile/bodyshot/unknown.png",
                     stats: {
                         kills: 15,
                         deaths: 13,
@@ -132,7 +132,7 @@ export const mockMatchData = {
                     id: "player-5",
                     name: "Rafael Costa",
                     nickname: "saffee",
-                    avatar: "/placeholder.svg?height=40&width=40",
+                    avatar: "https://static.hltv.org/images/playerprofile/bodyshot/unknown.png",
                     stats: {
                         kills: 17,
                         deaths: 11,
@@ -146,14 +146,14 @@ export const mockMatchData = {
         {
             id: "team-2",
             name: "Liquid",
-            logo: "/placeholder.svg?height=120&width=120",
+            logo: "https://www.hltv.org/img/static/team/placeholder.svg",
             score: 9,
             players: [
                 {
                     id: "player-6",
                     name: "Jonathan Jablonowski",
                     nickname: "EliGE",
-                    avatar: "/placeholder.svg?height=40&width=40",
+                    avatar: "https://static.hltv.org/images/playerprofile/bodyshot/unknown.png",
                     stats: {
                         kills: 16,
                         deaths: 17,
@@ -166,7 +166,7 @@ export const mockMatchData = {
                     id: "player-7",
                     name: "Keith Markovic",
                     nickname: "NAF",
-                    avatar: "/placeholder.svg?height=40&width=40",
+                    avatar: "https://static.hltv.org/images/playerprofile/bodyshot/unknown.png",
                     stats: {
                         kills: 20,
                         deaths: 16,
@@ -179,7 +179,7 @@ export const mockMatchData = {
                     id: "player-8",
                     name: "Josh Nissan",
                     nickname: "oSee",
-                    avatar: "/placeholder.svg?height=40&width=40",
+                    avatar: "https://static.hltv.org/images/playerprofile/bodyshot/unknown.png",
                     stats: {
                         kills: 14,
                         deaths: 18,
@@ -192,7 +192,7 @@ export const mockMatchData = {
                     id: "player-9",
                     name: "Nick Cannella",
                     nickname: "nitr0",
-                    avatar: "/placeholder.svg?height=40&width=40",
+                    avatar: "https://static.hltv.org/images/playerprofile/bodyshot/unknown.png",
                     stats: {
                         kills: 12,
                         deaths: 19,
@@ -205,7 +205,7 @@ export const mockMatchData = {
                     id: "player-10",
                     name: "Mareks Gaļinskis",
                     nickname: "YEKINDAR",
-                    avatar: "/placeholder.svg?height=40&width=40",
+                    avatar: "https://static.hltv.org/images/playerprofile/bodyshot/unknown.png",
                     stats: {
                         kills: 18,
                         deaths: 15,
@@ -227,7 +227,7 @@ export const mockMatchData = {
     },
     tournament: {
         name: "PGL Major Copenhagen 2024",
-        logo: "/placeholder.svg?height=40&width=40",
+        logo: "https://www.hltv.org/img/static/team/placeholder.svg",
     },
 };
 
@@ -235,28 +235,24 @@ export const mockHighlights = [
     {
         id: "highlight-1",
         title: "KSCERATO 4K clutch on B site",
-        thumbnail: "/placeholder.svg?height=200&width=350",
         time: "10 minutes ago",
         tags: ["Clutch", "4K"],
     },
     {
         id: "highlight-2",
         title: "arT aggressive AWP play mid",
-        thumbnail: "/placeholder.svg?height=200&width=350",
         time: "15 minutes ago",
         tags: ["AWP", "Entry"],
     },
     {
         id: "highlight-3",
         title: "yuurih triple kill defending A site",
-        thumbnail: "/placeholder.svg?height=200&width=350",
         time: "22 minutes ago",
         tags: ["Triple Kill", "Defense"],
     },
     {
         id: "highlight-4",
         title: "saffee wallbang headshot on catwalk",
-        thumbnail: "/placeholder.svg?height=200&width=350",
         time: "30 minutes ago",
         tags: ["Wallbang", "Headshot"],
     },
@@ -373,7 +369,7 @@ export const mockUpcomingMatches = [
         },
         team2: {
             name: "Liquid",
-            logo: "/placeholder.svg?height=60&width=60",
+            logo: "https://www.hltv.org/img/static/team/placeholder.svg",
         },
         date: "APR 16",
         fullDate: "April 16, 2024",
@@ -390,7 +386,7 @@ export const mockUpcomingMatches = [
         },
         team2: {
             name: "Complexity",
-            logo: "/placeholder.svg?height=60&width=60",
+            logo: "https://www.hltv.org/img/static/team/placeholder.svg",
         },
         date: "APR 18",
         fullDate: "April 18, 2024",
@@ -403,7 +399,7 @@ export const mockUpcomingMatches = [
         id: "upcoming-3",
         team1: {
             name: "NAVI",
-            logo: "/placeholder.svg?height=60&width=60",
+            logo: "https://www.hltv.org/img/static/team/placeholder.svg",
         },
         team2: {
             name: "FURIA",
@@ -424,7 +420,7 @@ export const mockUpcomingMatches = [
         },
         team2: {
             name: "G2",
-            logo: "/placeholder.svg?height=60&width=60",
+            logo: "https://www.hltv.org/img/static/team/placeholder.svg",
         },
         date: "APR 22",
         fullDate: "April 22, 2024",
@@ -437,7 +433,7 @@ export const mockUpcomingMatches = [
         id: "upcoming-5",
         team1: {
             name: "MOUZ",
-            logo: "/placeholder.svg?height=60&width=60",
+            logo: "https://www.hltv.org/img/static/team/placeholder.svg",
         },
         team2: {
             name: "FURIA",
@@ -458,7 +454,7 @@ export const mockUpcomingMatches = [
         },
         team2: {
             name: "FaZe",
-            logo: "/placeholder.svg?height=60&width=60",
+            logo: "https://www.hltv.org/img/static/team/placeholder.svg",
         },
         date: "APR 28",
         fullDate: "April 28, 2024",

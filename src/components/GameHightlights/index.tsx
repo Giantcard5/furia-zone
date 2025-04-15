@@ -31,7 +31,7 @@ export function GameHighlights() {
             {mockHighlights.map((highlight) => (
                 <S.HighlightCard key={highlight.id}>
                     <S.HighlightPreview onClick={() => openHighlight(highlight.id)}>
-                        <S.PreviewImage image={highlight.thumbnail} />
+                        <S.PreviewImage image='' />
                         <S.PlayButton>
                             <Play size={24} fill='white' />
                         </S.PlayButton>
