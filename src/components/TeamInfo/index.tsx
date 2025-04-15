@@ -6,6 +6,7 @@ import {
 } from 'react';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 import {
     mockTeamData
@@ -49,7 +50,6 @@ interface ApiResponse<T> {
 export function TeamInfo() {
     const { name, logo, stats, description } = mockTeamData;
 
-    const [teamData, setTeamData] = useState<TeamData | null>(null);
     const [playersData, setPlayersData] = useState<PlayerData[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -58,19 +58,18 @@ export function TeamInfo() {
             try {
                 setLoading(true);
                 const response = await apiService.getTeamData('8297');
-                
+
                 if (response.error) {
                     throw new Error(response.error);
                 };
 
                 const teamData = response.data as TeamData;
-                setTeamData(teamData);
-                
+
                 if (teamData?.players) {
-                    const playerPromises = teamData.players.map((player: { id: number; type: string }) => 
-                        apiService.getPlayerData(player.id.toString()) as Promise<ApiResponse<PlayerData>>
+                    const playerPromises = teamData.players.map((player: { id: number; type: string }) =>
+                        apiService.getPlayerData(player.id) as Promise<ApiResponse<PlayerData>>
                     );
-                    
+
                     const playerResponses = await Promise.all(playerPromises);
                     const validPlayerData = playerResponses
                         .filter(response => !response.error)
@@ -78,7 +77,7 @@ export function TeamInfo() {
                             ...response.data,
                             type: teamData.players[index].type
                         }));
-                    
+
                     setPlayersData(validPlayerData);
                 };
             } catch (err) {
@@ -111,7 +110,7 @@ export function TeamInfo() {
                     <S.TeamStats>
                         {loading ? (
                             Array(4).fill(0).map((_, index) => (
-                                <S.StatItem key={index} className="loading">
+                                <S.StatItem key={index} className='loading'>
                                     <S.StatValue>&nbsp;</S.StatValue>
                                     <S.StatLabel>&nbsp;</S.StatLabel>
                                 </S.StatItem>
@@ -137,23 +136,25 @@ export function TeamInfo() {
                         ))
                     ) : (
                         playersData.map((player) => (
-                            <S.PlayerCard key={player.id}>
-                                <S.PlayerHeader>
-                                    <S.PlayerImage>
-                                        <Image
-                                            src={player.image}
-                                            alt={player.name}
-                                            fill
-                                            style={{ objectFit: 'contain' }}
-                                        />
-                                    </S.PlayerImage>
-                                </S.PlayerHeader>
-                                <S.PlayerInfo>
-                                    <S.PlayerName>{player.name}</S.PlayerName>
-                                    <S.PlayerNickname>{player.ign}</S.PlayerNickname>
-                                    <S.PlayerRole>{player.type}</S.PlayerRole>
-                                </S.PlayerInfo>
-                            </S.PlayerCard>
+                            <Link href={`/team-info/${player.id}`} key={player.id}>
+                                <S.PlayerCard>
+                                    <S.PlayerHeader>
+                                        <S.PlayerImage>
+                                            <Image
+                                                src={player.image}
+                                                alt={player.name}
+                                                fill
+                                                style={{ objectFit: 'contain' }}
+                                            />
+                                        </S.PlayerImage>
+                                    </S.PlayerHeader>
+                                    <S.PlayerInfo>
+                                        <S.PlayerName>{player.name}</S.PlayerName>
+                                        <S.PlayerNickname>{player.ign}</S.PlayerNickname>
+                                        <S.PlayerRole>{player.type}</S.PlayerRole>
+                                    </S.PlayerInfo>
+                                </S.PlayerCard>
+                            </Link>
                         ))
                     )}
                 </S.PlayersGrid>

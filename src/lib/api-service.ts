@@ -35,7 +35,7 @@ export const apiService = {
         return fetchApi(`/teams/${teamId}`);
     },
 
-    getPlayerData: async (playerId: string) => {
+    getPlayerData: async (playerId: number) => {
         return fetchApi(`/players/${playerId}`);
     },
 }; 

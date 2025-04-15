@@ -468,3 +468,474 @@ export const mockUpcomingMatches = [
         location: "Copenhagen, Denmark",
     },
 ];
+
+export const mockPlayerDetails = [
+    {
+        "id": 2023,
+        "name": "Gabriel Toledo",
+        "ign": "FalleN",
+        "image": "https://img-cdn.hltv.org/playerbodyshot/Wf26SO_o8nvnsLh0AqZXc5.png?ixlib=java-2.1.0&w=400&s=36b7189a4ae7b020d0acb087fd44777a",
+        "age": 33,
+        "twitch": "https://www.twitch.tv/gafallen",
+        "instagram": "https://www.instagram.com/fallen",
+        "country": {
+            "name": "Brazil",
+            "code": "BR"
+        },
+        "team": {
+            "name": "FURIA",
+            "id": 8297
+        },
+        "statistics": {
+            "rating": 0.97,
+            "killsPerRound": null,
+            "headshots": null,
+            "mapsPlayed": null,
+            "deathsPerRound": null,
+            "roundsContributed": null
+        },
+        "achievements": [
+            {
+                "place": "Legends",
+                "event": {
+                    "name": "Perfect World Shanghai Major 2024",
+                    "id": 7524
+                }
+            },
+            {
+                "place": "Legends",
+                "event": {
+                    "name": "PGL CS2 Major Copenhagen 2024",
+                    "id": 7148
+                }
+            },
+            {
+                "place": "Challengers",
+                "event": {
+                    "name": "IEM Rio Major 2022 Challengers Stage",
+                    "id": 6588
+                }
+            },
+            {
+                "place": "Legends",
+                "event": {
+                    "name": "PGL Major Antwerp 2022",
+                    "id": 6372
+                }
+            },
+            {
+                "place": "Legends",
+                "event": {
+                    "name": "PGL Major Stockholm 2021",
+                    "id": 4866
+                }
+            },
+            {
+                "place": "Legends",
+                "event": {
+                    "name": "StarLadder Major Berlin 2019",
+                    "id": 4443
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "IEM Katowice 2019",
+                    "id": 3883
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "FACEIT Major 2018",
+                    "id": 3564
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "ELEAGUE Major 2018",
+                    "id": 3247
+                }
+            },
+            {
+                "place": "1/4 final",
+                "event": {
+                    "name": "PGL Major Krakow 2017",
+                    "id": 2720
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "ELEAGUE Major 2017",
+                    "id": 2471
+                }
+            },
+            {
+                "place": "1st",
+                "event": {
+                    "name": "ESL One Cologne 2016",
+                    "id": 2062
+                }
+            },
+            {
+                "place": "1st",
+                "event": {
+                    "name": "MLG Columbus 2016",
+                    "id": 2027
+                }
+            },
+            {
+                "place": "1/4 final",
+                "event": {
+                    "name": "DreamHack Open Cluj-Napoca 2015",
+                    "id": 1617
+                }
+            },
+            {
+                "place": "1/4 final",
+                "event": {
+                    "name": "ESL One Cologne 2015",
+                    "id": 1666
+                }
+            },
+            {
+                "place": "1/4 final",
+                "event": {
+                    "name": "ESL One Katowice 2015",
+                    "id": 1611
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "IEM Rio 2024",
+                    "id": 7439
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "YaLLa Compass 2024",
+                    "id": 7475
+                }
+            },
+            {
+                "place": "1st",
+                "event": {
+                    "name": "Elisa Masters Espoo 2023",
+                    "id": 7250
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "BLAST Premier Spring Final 2023",
+                    "id": 6972
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "CS:GO Asia Championships 2019",
+                    "id": 4680
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "V4 Future Sports Festival 2019",
+                    "id": 4828
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "IEM Chicago 2019",
+                    "id": 4574
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "IEM Sydney 2019",
+                    "id": 4236
+                }
+            },
+            {
+                "place": "3rd",
+                "event": {
+                    "name": "BLAST Pro Series Miami 2019",
+                    "id": 4327
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "IEM Katowice 2019",
+                    "id": 3883
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "ESL Pro League Season 8 Finals",
+                    "id": 3376
+                }
+            },
+            {
+                "place": "2nd",
+                "event": {
+                    "name": "ECS Season 6 Finals",
+                    "id": 4083
+                }
+            },
+            {
+                "place": "2nd",
+                "event": {
+                    "name": "BLAST Pro Series Istanbul 2018",
+                    "id": 3647
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "FACEIT Major 2018",
+                    "id": 3564
+                }
+            },
+            {
+                "place": "1st",
+                "event": {
+                    "name": "ZOTAC Cup Masters 2018 Grand Finals",
+                    "id": 3603
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "ESL One Belo Horizonte 2018",
+                    "id": 3649
+                }
+            },
+            {
+                "place": "3rd",
+                "event": {
+                    "name": "cs_summit 2",
+                    "id": 3454
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "ELEAGUE Major 2018",
+                    "id": 3247
+                }
+            },
+            {
+                "place": "1st",
+                "event": {
+                    "name": "ESL Pro League Season 6 Finals",
+                    "id": 3072
+                }
+            },
+            {
+                "place": "1st",
+                "event": {
+                    "name": "BLAST Pro Series Copenhagen 2017",
+                    "id": 2998
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "IEM Oakland 2017",
+                    "id": 2956
+                }
+            },
+            {
+                "place": "1st",
+                "event": {
+                    "name": "EPICENTER 2017",
+                    "id": 3133
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "ESL One New York 2017",
+                    "id": 2636
+                }
+            },
+            {
+                "place": "3rd",
+                "event": {
+                    "name": "ESG Tour Mykonos 2017",
+                    "id": 3061
+                }
+            },
+            {
+                "place": "1st",
+                "event": {
+                    "name": "ESL One Cologne 2017",
+                    "id": 2635
+                }
+            },
+            {
+                "place": "1st",
+                "event": {
+                    "name": "ECS Season 3 Finals",
+                    "id": 2763
+                }
+            },
+            {
+                "place": "1st",
+                "event": {
+                    "name": "DreamHack Open Summer 2017",
+                    "id": 2569
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "ESL Pro League Season 5 Finals",
+                    "id": 2557
+                }
+            },
+            {
+                "place": "1st",
+                "event": {
+                    "name": "IEM Sydney 2017",
+                    "id": 2713
+                }
+            },
+            {
+                "place": "1st",
+                "event": {
+                    "name": "cs_summit Spring 2017",
+                    "id": 2641
+                }
+            },
+            {
+                "place": "2nd",
+                "event": {
+                    "name": "DreamHack Masters Las Vegas 2017",
+                    "id": 2541
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "ELEAGUE Major 2017",
+                    "id": 2471
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "ECS Season 2 Finals",
+                    "id": 2367
+                }
+            },
+            {
+                "place": "2nd",
+                "event": {
+                    "name": "IEM Oakland 2016",
+                    "id": 2261
+                }
+            },
+            {
+                "place": "2nd",
+                "event": {
+                    "name": "ESL Pro League Season 4 Finals",
+                    "id": 2306
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "ELEAGUE Season 2",
+                    "id": 2407
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "EPICENTER: Moscow",
+                    "id": 2410
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "ESL One New York 2016",
+                    "id": 2239
+                }
+            },
+            {
+                "place": "1st",
+                "event": {
+                    "name": "ESL One Cologne 2016",
+                    "id": 2062
+                }
+            },
+            {
+                "place": "2nd",
+                "event": {
+                    "name": "ECS Season 1 Finals",
+                    "id": 2248
+                }
+            },
+            {
+                "place": "1st",
+                "event": {
+                    "name": "ESL Pro League Season 3 Finals",
+                    "id": 2130
+                }
+            },
+            {
+                "place": "1st",
+                "event": {
+                    "name": "DreamHack Austin 2016",
+                    "id": 1954
+                }
+            },
+            {
+                "place": "1st",
+                "event": {
+                    "name": "MLG Columbus 2016",
+                    "id": 2027
+                }
+            },
+            {
+                "place": "2nd",
+                "event": {
+                    "name": "IEM Katowice 2016",
+                    "id": 2036
+                }
+            },
+            {
+                "place": "2nd",
+                "event": {
+                    "name": "DreamHack ZOWIE Open Leipzig 2016",
+                    "id": 1977
+                }
+            },
+            {
+                "place": "3-4th",
+                "event": {
+                    "name": "SL i-League StarSeries XIV Finals",
+                    "id": 1978
+                }
+            },
+            {
+                "place": "2nd",
+                "event": {
+                    "name": "FACEIT League 2015 Stage 3 Finals at DH Winter 2015",
+                    "id": 1615
+                }
+            }
+        ],
+    }
+];
