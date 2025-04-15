@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const SidebarContainer = styled.aside<{ isOpen: boolean }>`
+const SidebarContainer = styled.aside<{ $isOpen: boolean }>`
     position: fixed;
     top: 0;
     left: 0;
@@ -8,7 +8,7 @@ const SidebarContainer = styled.aside<{ isOpen: boolean }>`
     height: 100vh;
     background-color: #0A0A0A;
     z-index: 50;
-    transform: translateX(${(props) => (props.isOpen ? '0' : '-100%')});
+    transform: translateX(${(props) => (props.$isOpen ? '0' : '-100%')});
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -65,14 +65,14 @@ const NavList = styled.nav`
     padding: 1rem 0;
 `;
 
-const NavItem = styled.div<{ isActive: boolean }>`
+const NavItem = styled.div<{ $isActive: boolean }>`
     padding: 0.75rem 1.5rem;
     margin: 0.25rem 0;
     display: flex;
     align-items: center;
-    color: ${(props) => (props.isActive ? ({ theme }) => theme.colors.primary : 'white')};
-    background-color: ${(props) => (props.isActive ? 'rgba(212, 175, 55, 0.05)' : 'transparent')};
-    border-left: 3px solid ${(props) => (props.isActive ? ({ theme }) => theme.colors.primary : 'transparent')};
+    color: ${(props) => (props.$isActive ? ({ theme }) => theme.colors.primary : 'white')};
+    background-color: ${(props) => (props.$isActive ? 'rgba(212, 175, 55, 0.05)' : 'transparent')};
+    border-left: 3px solid ${(props) => (props.$isActive ? ({ theme }) => theme.colors.primary : 'transparent')};
     transition: all 0.2s ease;
     
     &:hover {
@@ -92,7 +92,7 @@ const NavText = styled.span`
     font-family: 'Space Mono', monospace;
 `;
 
-const Overlay = styled.div<{ isOpen: boolean }>`
+const Overlay = styled.div<{ $isOpen: boolean }>`
     position: fixed;
     top: 0;
     left: 0;
@@ -100,7 +100,7 @@ const Overlay = styled.div<{ isOpen: boolean }>`
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 40;
-    display: ${(props) => (props.isOpen ? 'block' : 'none')};
+    display: ${(props) => (props.$isOpen ? 'block' : 'none')};
     
     @media (min-width: 768px) {
         display: none;

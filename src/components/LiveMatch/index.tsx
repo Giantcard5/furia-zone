@@ -43,13 +43,13 @@ export function LiveMatchStatus() {
                 </S.MatchHeader>
 
                 <S.TabsContainer>
-                    <S.Tab isActive={activeTab === 'scoreboard'} onClick={() => setActiveTab('scoreboard')}>
+                    <S.Tab $isActive={activeTab === 'scoreboard'} onClick={() => setActiveTab('scoreboard')}>
                         SCOREBOARD
                     </S.Tab>
-                    <S.Tab isActive={activeTab === 'player-stats'} onClick={() => setActiveTab('player-stats')}>
+                    <S.Tab $isActive={activeTab === 'player-stats'} onClick={() => setActiveTab('player-stats')}>
                         PLAYER STATS
                     </S.Tab>
-                    <S.Tab isActive={activeTab === 'highlights'} onClick={() => setActiveTab('highlights')}>
+                    <S.Tab $isActive={activeTab === 'highlights'} onClick={() => setActiveTab('highlights')}>
                         HIGHLIGHTS
                     </S.Tab>
                 </S.TabsContainer>

@@ -93,22 +93,22 @@ const TabsContainer = styled.div`
     }
 `;
 
-const Tab = styled.button<{ isActive: boolean }>`
+const Tab = styled.button<{ $isActive: boolean }>`
     padding: 0.75rem 1.25rem;
     background: none;
     border: none;
-    color: ${(props) => (props.isActive ? ({ theme }) => theme.colors.primary : ({ theme }) => theme.colors.text.secondary)};
+    color: ${(props) => (props.$isActive ? ({ theme }) => theme.colors.primary : ({ theme }) => theme.colors.text.secondary)};
     font-size: 0.875rem;
-    font-weight: ${(props) => (props.isActive ? ({ theme }) => theme.typography.fontWeight.semibold : ({ theme }) => theme.typography.fontWeight.regular)};
+    font-weight: ${(props) => (props.$isActive ? ({ theme }) => theme.typography.fontWeight.semibold : ({ theme }) => theme.typography.fontWeight.regular)};
     cursor: pointer;
-    border-bottom: 2px solid ${(props) => (props.isActive ? ({ theme }) => theme.colors.primary : 'transparent')};
+    border-bottom: 2px solid ${(props) => (props.$isActive ? ({ theme }) => theme.colors.primary : 'transparent')};
     transition: all ${({ theme }) => theme.transitions.fast};
     white-space: nowrap;
     font-family: 'Space Mono', monospace;
     letter-spacing: 0.05em;
     
     &:hover {
-        color: ${(props) => (props.isActive ? ({ theme }) => theme.colors.primary : 'white')};
+        color: ${(props) => (props.$isActive ? ({ theme }) => theme.colors.primary : 'white')};
     }
 `;
 

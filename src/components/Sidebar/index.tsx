@@ -19,11 +19,11 @@ import {
 import * as S from './styles';
 
 interface SidebarProps {
-    isOpen: boolean
+    $isOpen: boolean
     onClose: () => void
 };
 
-export function Sidebar({ isOpen, onClose }: SidebarProps) {
+export function Sidebar({ $isOpen, onClose }: SidebarProps) {
     const pathname = usePathname();
 
     const navItems = [
@@ -37,7 +37,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 
     return (
         <>
-            <S.SidebarContainer isOpen={isOpen}>
+            <S.SidebarContainer $isOpen={$isOpen}>
                 <S.SidebarHeader>
                     <S.Logo src='/icon-gold.png' alt='FURIA' />
                     <S.Text>FURIA <span>ZONE</span></S.Text>
@@ -48,7 +48,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                 <S.NavList>
                     {navItems.map((item) => (
                         <Link href={item.path} key={item.path} onClick={onClose}>
-                            <S.NavItem isActive={pathname === item.path}>
+                            <S.NavItem $isActive={pathname === item.path}>
                                 <S.NavIcon>{item.icon}</S.NavIcon>
                                 <S.NavText>{item.label}</S.NavText>
                             </S.NavItem>
@@ -59,7 +59,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                     <S.GoldText>FURIA</S.GoldText> | COPYRIGHT © 2025
                 </S.SidebarFooter>
             </S.SidebarContainer>
-            <S.Overlay isOpen={isOpen} onClick={onClose} />
+            <S.Overlay $isOpen={$isOpen} onClick={onClose} />
         </>
     );
 };

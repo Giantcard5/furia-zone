@@ -54,7 +54,7 @@ export function GameHighlights() {
                 </S.HighlightCard>
             ))}
 
-            <S.VideoModal isOpen={!!selectedHighlight} onClick={closeHighlight}>
+            <S.VideoModal $isOpen={!!selectedHighlight} onClick={closeHighlight}>
                 <S.CloseButton onClick={closeHighlight}>✕</S.CloseButton>
                 <S.VideoContainer onClick={(e) => e.stopPropagation()}>
                     <S.VideoWrapper>

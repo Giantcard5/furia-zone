@@ -24,7 +24,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
 
     return (
         <S.LayoutContainer>
-            <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+            <Sidebar $isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
             <S.MainContent>
                 {children}
             </S.MainContent>
