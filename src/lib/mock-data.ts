@@ -73,7 +73,7 @@ export const mockMatchData = {
         {
             id: "team-1",
             name: "FURIA",
-            logo: "https://www.hltv.org/img/static/team/placeholder.svg",
+            logo: "/icon-black.png",
             score: 12,
             players: [
                 {
@@ -222,7 +222,7 @@ export const mockMatchData = {
         status: "in-progress",
         rounds: {
             current: 21,
-            total: 30,
+            total: 24,
         },
     },
     tournament: {

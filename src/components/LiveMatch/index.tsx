@@ -15,9 +15,6 @@ import {
 import { 
     GameHighlights 
 } from '@/components/GameHightlights';
-import { 
-    UpcomingMatches 
-} from '@/components/UpcomingMatches';
 
 import { 
     mockMatchData 
@@ -33,7 +30,7 @@ export function LiveMatchStatus() {
             <div>
                 <S.MatchHeader>
                     <S.TournamentBadge>
-                        <S.CrownIcon /> {tournament.name}
+                        {tournament.name}
                     </S.TournamentBadge>
                     <S.LiveBadge>LIVE NOW</S.LiveBadge>
                     <S.MatchTitle>

@@ -13,7 +13,6 @@ interface Team {
 
 interface Map {
     name: string
-    status: string
     rounds: {
         current: number
         total: number
@@ -21,13 +20,8 @@ interface Map {
 };
 
 interface MatchData {
-    id: string
     teams: Team[]
-    currentMap: Map
-    tournament: {
-        name: string
-        logo: string
-    };
+    currentMap: Map;
 };
 
 interface MatchScoreboardProps {
