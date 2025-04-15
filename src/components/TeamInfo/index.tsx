@@ -1,17 +1,73 @@
 'use client'
 
+import {
+    useState,
+    useEffect
+} from 'react';
+
 import Image from 'next/image';
 
 import {
     mockTeamData
 } from '@/lib/mock-data';
+import {
+    apiService
+} from '@/lib/api-service';
 
 import * as S from './styles';
 
+import {
+    getImageFromName
+} from '@/utils/image';
+
+interface TeamData {
+    id: number;
+    name: string;
+    logo: string;
+    players: Array<{
+        id: number;
+        nickname: string;
+        name: string;
+        type: string;
+    }>;
+    stats: {
+        matches: number;
+        wins: number;
+        losses: number;
+        winRate: number;
+    };
+}
+
 export function TeamInfo() {
-    const { name, logo, description, stats, players } = mockTeamData
+    const { name, logo, stats, description } = mockTeamData;
+
+    const [teamData, setTeamData] = useState<TeamData | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchTeamData() {
+            try {
+                setLoading(true);
+
+                const response = await apiService.getTeamData('8297');
+
+                if (response.error) {
+                    throw new Error(response.error);
+                };
+
+                setTeamData(response.data as TeamData);
+            } catch (err) {
+                console.error('Error fetching team data:', err);
+            } finally {
+                setLoading(false);
+            };
+        };
+
+        fetchTeamData();
+    }, []);
 
     return (
+
         <S.TeamContainer>
             <S.TeamHeader>
                 <S.TeamLogo>
@@ -28,12 +84,21 @@ export function TeamInfo() {
                     <S.TeamDescription>{description}</S.TeamDescription>
 
                     <S.TeamStats>
-                        {stats.map((stat, index) => (
-                            <S.StatItem key={index}>
-                                <S.StatValue>{stat.value}</S.StatValue>
-                                <S.StatLabel>{stat.label}</S.StatLabel>
-                            </S.StatItem>
-                        ))}
+                        {loading ? (
+                            Array(4).fill(0).map((_, index) => (
+                                <S.StatItem key={index} className="loading">
+                                    <S.StatValue>&nbsp;</S.StatValue>
+                                    <S.StatLabel>&nbsp;</S.StatLabel>
+                                </S.StatItem>
+                            ))
+                        ) : (
+                            stats.map((stat, index) => (
+                                <S.StatItem key={index}>
+                                    <S.StatValue>{stat.value}</S.StatValue>
+                                    <S.StatLabel>{stat.label}</S.StatLabel>
+                                </S.StatItem>
+                            ))
+                        )}
                     </S.TeamStats>
                 </S.TeamInfoSection>
             </S.TeamHeader>
@@ -41,26 +106,31 @@ export function TeamInfo() {
             <div>
                 <S.SectionTitle>PLAYERS</S.SectionTitle>
                 <S.PlayersGrid>
-                    {players.map((player) => (
-                        <S.PlayerCard key={player.id}>
-                            <S.PlayerHeader>
-                                <S.PlayerImage>
-                                    <Image
-                                        src={player.image || '/placeholder.svg?height=180&width=150'}
-                                        alt={player.name}
-                                        fill
-                                        style={{ objectFit: 'contain' }}
-                                    />
-                                </S.PlayerImage>
-                            </S.PlayerHeader>
-
-                            <S.PlayerInfo>
-                                <S.PlayerName>{player.name}</S.PlayerName>
-                                <S.PlayerNickname>{player.nickname}</S.PlayerNickname>
-                                <S.PlayerRole>{player.role}</S.PlayerRole>
-                            </S.PlayerInfo>
-                        </S.PlayerCard>
-                    ))}
+                    {loading ? (
+                        Array(5).fill(0).map((_, index) => (
+                            <S.PlayerCardLoading key={index} />
+                        ))
+                    ) : (
+                        teamData?.players.map((player) => (
+                            <S.PlayerCard key={player.id}>
+                                <S.PlayerHeader>
+                                    <S.PlayerImage>
+                                        <Image
+                                            src={getImageFromName[player.name as keyof typeof getImageFromName]}
+                                            alt={player.name}
+                                            fill
+                                            style={{ objectFit: 'contain' }}
+                                        />
+                                    </S.PlayerImage>
+                                </S.PlayerHeader>
+                                <S.PlayerInfo>
+                                    <S.PlayerName>{player.name}</S.PlayerName>
+                                    <S.PlayerNickname>{player.nickname}</S.PlayerNickname>
+                                    <S.PlayerRole>{player.type}</S.PlayerRole>
+                                </S.PlayerInfo>
+                            </S.PlayerCard>
+                        ))
+                    )}
                 </S.PlayersGrid>
             </div>
         </S.TeamContainer>

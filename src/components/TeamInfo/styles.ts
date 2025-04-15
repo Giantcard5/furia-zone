@@ -1,4 +1,13 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const loading = keyframes`
+    0% { 
+        background-position: 200% 0; 
+    }
+    100% { 
+        background-position: -200% 0; 
+    }
+`;
 
 const TeamContainer = styled.div`
     display: flex;
@@ -75,6 +84,14 @@ const StatItem = styled.div`
     min-width: 100px;
     text-align: center;
     border: 1px solid rgba(212, 175, 55, 0.1);
+    position: relative;
+    overflow: hidden;
+
+    &.loading {
+        background: linear-gradient(90deg, rgba(0,0,0,0.3) 0%, rgba(212,175,55,0.1) 50%, rgba(0,0,0,0.3) 100%);
+        background-size: 200% 100%;
+        animation: ${loading} 4s infinite;
+    }
 `;
 
 const StatValue = styled.div`
@@ -127,6 +144,17 @@ const PlayerCard = styled.div`
         transform: translateY(-5px);
         border-color: rgba(212, 175, 55, 0.3);
     }
+`;
+
+const PlayerCardLoading = styled.div`
+    height: 292px;
+    overflow: hidden;
+    transition: transform ${({ theme }) => theme.transitions.fast};
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    position: relative;
+    background: linear-gradient(90deg, rgba(0,0,0,0.3) 0%, rgba(212,175,55,0.1) 50%, rgba(0,0,0,0.3) 100%);
+    background-size: 200% 100%;
+    animation: ${loading} 4s infinite;
 `;
 
 const PlayerHeader = styled.div`
@@ -185,6 +213,7 @@ export {
     SectionTitle,
     PlayersGrid,
     PlayerCard,
+    PlayerCardLoading,
     PlayerHeader,
     PlayerImage,
     PlayerInfo,

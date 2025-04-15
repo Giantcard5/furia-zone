@@ -269,8 +269,8 @@ export const mockTeamData = {
         "FURIA Esports is a Brazilian professional esports organization founded in 2017. Their CS:GO team has become one of the top teams in the world, known for their aggressive playstyle and innovative strategies.",
     stats: [
         { label: "World Rank", value: "#18" },
-        { label: "Tournaments Won", value: "12" },
-        { label: "Win Rate", value: "68%" },
+        { label: "Tournaments Won", value: "4" },
+        { label: "Win Rate", value: "38.1%" },
         { label: "Maps Played", value: "342" },
     ],
     players: [

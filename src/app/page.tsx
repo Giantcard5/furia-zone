@@ -1,8 +1,8 @@
-import { 
-    MainLayout 
+import {
+    MainLayout
 } from '@/components/MainLayout';
-import { 
-    HeroSection 
+import {
+    HeroSection
 } from '@/components/HeroSection';
 
 export default function Home() {
