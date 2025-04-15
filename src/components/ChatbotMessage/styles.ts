@@ -1,32 +1,32 @@
 import styled, { keyframes } from 'styled-components';
 
-const MessageContainer = styled.div<{ isUser: boolean }>`
+const MessageContainer = styled.div<{ $isUser: boolean }>`
     display: flex;
     gap: 0.75rem;
     max-width: 80%;
-    align-self: ${(props) => (props.isUser ? "flex-end" : "flex-start")};
+    align-self: ${(props) => (props.$isUser ? "flex-end" : "flex-start")};
     
     @media (min-width: 768px) {
         max-width: 70%;
     };
 `;
 
-const Avatar = styled.div<{ isUser: boolean }>`
+const Avatar = styled.div<{ $isUser: boolean }>`
     width: 40px;
     height: 40px;
     border-radius: ${({ theme }) => theme.borderRadius.full};
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: ${(props) => (props.isUser ? "#333" : ({ theme }) => theme.colors.primary)};
-    order: ${(props) => (props.isUser ? 1 : 0)};
+    background-color: ${({ theme, $isUser }) => $isUser ? "#333" : theme.colors.primary};
+    order: ${(props) => (props.$isUser ? 1 : 0)};
 `;
 
-const MessageBubble = styled.div<{ isUser: boolean }>`
-    background-color: ${(props) => (props.isUser ? "rgba(212, 175, 55, 0.1)" : "rgba(0, 0, 0, 0.3)")};
+const MessageBubble = styled.div<{ $isUser: boolean }>`
+    background-color: ${(props) => (props.$isUser ? "rgba(212, 175, 55, 0.1)" : "rgba(0, 0, 0, 0.3)")};
     padding: 0.75rem 1rem;
     border-radius: 4px;
-    border: 1px solid ${(props) => (props.isUser ? "rgba(212, 175, 55, 0.2)" : "rgba(255, 255, 255, 0.05)")};
+    border: 1px solid ${(props) => (props.$isUser ? "rgba(212, 175, 55, 0.2)" : "rgba(255, 255, 255, 0.05)")};
 `;
 
 const MessageText = styled.p`

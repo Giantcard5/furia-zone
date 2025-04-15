@@ -27,11 +27,13 @@ export function ChatbotMessage({ message }: ChatbotMessageProps) {
     });
 
     return (
-        <S.MessageContainer isUser={isUser}>
-            <S.Avatar isUser={isUser}>{isUser ? <User size={20} /> : <Bot size={20} color='black' />}</S.Avatar>
+        <S.MessageContainer $isUser={isUser}>
+            <S.Avatar $isUser={isUser}>
+                {isUser ? <User size={20} /> : <Bot size={20} color='black' />}
+            </S.Avatar>
 
             <div>
-                <S.MessageBubble isUser={isUser}>
+                <S.MessageBubble $isUser={isUser}>
                     {message.isTyping ? (
                         <S.TypingIndicator>
                             <span></span>

@@ -24,7 +24,7 @@ const TeamName = styled.h3<{ isFuria?: boolean }>`
     margin: 0;
     font-family: 'Space Mono', monospace;
     letter-spacing: 0.05em;
-    color: ${(props) => (props.isFuria ? ({ theme }) => theme.colors.primary : 'white')};
+    color: ${({ theme, isFuria }) => isFuria ? theme.colors.primary : 'white'};
 `;
 
 const StatsTable = styled.div`

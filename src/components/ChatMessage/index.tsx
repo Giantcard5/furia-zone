@@ -33,7 +33,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
     });
 
     return (
-        <S.MessageContainer isModerator={message.user.isModerator}>
+        <S.MessageContainer $isModerator={message.user.isModerator}>
             <S.AvatarContainer>
                 {message.user.avatar.length > 0 ? (
                     <Image src={message.user.avatar} alt={message.user.name} width={30} height={30} />
@@ -44,7 +44,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
 
             <S.MessageContent>
                 <S.MessageHeader>
-                    <S.Username isModerator={message.user.isModerator}>{message.user.name}</S.Username>
+                    <S.Username $isModerator={message.user.isModerator}>{message.user.name}</S.Username>
 
                     {message.user.isModerator && <S.ModeratorBadge>MOD</S.ModeratorBadge>}
 
@@ -55,4 +55,4 @@ export function ChatMessage({ message }: ChatMessageProps) {
             </S.MessageContent>
         </S.MessageContainer>
     );
-};
+}
