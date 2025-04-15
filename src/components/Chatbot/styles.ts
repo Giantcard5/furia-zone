@@ -1,3 +1,4 @@
+import { theme } from '@/styles/theme';
 import styled from 'styled-components';
 
 const ChatbotContainer = styled.div`
@@ -10,12 +11,39 @@ const ChatbotContainer = styled.div`
 `;
 
 const ChatbotHeader = styled.div`
+    display: flex;
+    justify-content: space-between;
     padding: 1rem;
     background-color: rgba(0, 0, 0, 0.3);
     border-bottom: 1px solid rgba(212, 175, 55, 0.1);
     display: flex;
     align-items: center;
     gap: 0.75rem;
+`;
+
+const HeaderLeft = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+`;
+
+const WhatsAppButton = styled.a`
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: ${theme.colors.primary};
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    text-decoration: none;
+    transition: all ${theme.transitions.fast};
+    
+    &:hover {
+        background-color: rgba(212, 175, 55, 0.2);
+        box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    }
 `;
 
 const BotIcon = styled.div`
@@ -29,7 +57,7 @@ const BotIcon = styled.div`
 `;
 
 const BotInfo = styled.div`
-    flex: 1;
+  flex: 1;
 `;
 
 const BotTitle = styled.h2`
@@ -135,6 +163,8 @@ const SuggestedQuestion = styled.button`
 export {
     ChatbotContainer,
     ChatbotHeader,
+    HeaderLeft,
+    WhatsAppButton,
     BotIcon,
     BotInfo,
     BotTitle,

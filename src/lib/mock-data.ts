@@ -323,41 +323,40 @@ export const mockTeamData = {
 };
 
 export const mockBotResponses = [
-    {
-        keywords: ["next match", "upcoming match", "when is", "schedule"],
-        response: "FURIA's next match is against Liquid tomorrow at 3:00 PM EST in the PGL Major Copenhagen 2024.",
-    },
-    {
-        keywords: ["top fragger", "best player", "most kills"],
-        response:
-            "Currently, KSCERATO is the top fragger for FURIA with an average of 22.7 kills per map in the last 5 matches.",
-    },
-    {
-        keywords: ["tournament", "results", "recent matches", "last match"],
-        response: "FURIA recently finished 2nd place at IEM Katowice 2023 and won the BLAST Premier Spring Groups 2023.",
-    },
-    {
-        keywords: ["roster", "team members", "players", "lineup"],
-        response: "The current FURIA CS:GO roster consists of arT (IGL), KSCERATO, yuurih, drop, and saffee.",
-    },
-    {
-        keywords: ["coach", "coaching staff", "manager"],
-        response: 'FURIA\'s head coach is Nicholas "guerri" Nogueira, who has been with the team since 2018.',
-    },
-    {
-        keywords: ["history", "founded", "origin", "started"],
-        response:
-            "FURIA Esports was founded in 2017 in Brazil by Jaime Pádua and André Akkari. The CS:GO division was established in the same year.",
-    },
-    {
-        keywords: ["playstyle", "strategy", "tactics", "play style"],
-        response:
-            "FURIA is known for their aggressive playstyle, often led by arT's unpredictable entry fragging. They frequently use fast-paced strategies and innovative utility usage.",
-    },
-    {
-        keywords: ["hello", "hi", "hey", "greetings"],
-        response: "Hello! I'm the FURIA FAQ Bot. How can I help you with information about the FURIA CS:GO team today?",
-    },
+    [
+        {
+            "keywords": ["next match", "upcoming match", "when is", "schedule", "próximo jogo", "quando é o próximo jogo", "próxima partida"],
+            "response": "Ainda não tenho informações sobre o próximo jogo da FURIA. Mas você pode perguntar sobre o elenco, treinador ou história da equipe."
+        },
+        {
+            "keywords": ["top fragger", "best player", "most kills", "quem é o top fragger", "melhor jogador", "mais abates"],
+            "response": "Atualmente, o top fragger da FURIA é o KSCERATO, com um rating de 1.19 nos ultimos 1310 jogos."
+        },
+        {
+            "keywords": ["tournament", "results", "recent matches", "last match", "resultado do último torneio", "último resultado", "último torneio", "última partida"],
+            "response": "A FURIA ficou em 1º lugar no Elisa Masters Espoo 2023 e venceu o BLAST Premier Spring Groups 2023 recentemente."
+        },
+        {
+            "keywords": ["roster", "team members", "players", "lineup", "elenco atual", "jogadores", "time da FURIA", "quem joga"],
+            "response": "O elenco atual da FURIA no CS2 é composto por: Fallen, KSCERATO, yuurih, skullz e molodoy."
+        },
+        {
+            "keywords": ["coach", "coaching staff", "manager", "técnico", "treinador", "quem é o técnico"],
+            "response": "O treinador principal da FURIA é Sid \"Sid Macedo\" Macedo, que está com a equipe desde 2024."
+        },
+        {
+            "keywords": ["history", "founded", "origin", "started", "história", "origem", "fundação", "quando foi criada"],
+            "response": "A FURIA Esports foi fundada em 2017 no Brasil por Jaime Pádua e André Akkari. A divisão de CS:GO foi criada no mesmo ano."
+        },
+        {
+            "keywords": ["playstyle", "strategy", "tactics", "play style", "estilo de jogo", "tática", "estratégia"],
+            "response": "A FURIA é conhecida por seu estilo de jogo agressivo, liderado pelas entradas imprevisíveis do arT. A equipe utiliza estratégias rápidas e uso criativo de utilitários."
+        },
+        {
+            "keywords": ["hello", "hi", "hey", "greetings", "olá", "oi", "e aí", "saudações"],
+            "response": "Olá! Eu sou o FURIA FAQ Bot. Como posso te ajudar com informações sobre o time de CS:GO da FURIA hoje?"
+        }
+    ]
 ];
 
 export const mockUpcomingMatches = [

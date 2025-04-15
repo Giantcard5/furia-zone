@@ -8,7 +8,8 @@ import React, {
 
 import {
     Send,
-    Bot
+    Bot,
+    MessageSquare
 } from 'lucide-react';
 
 import {
@@ -29,11 +30,18 @@ interface Message {
     isTyping?: boolean
 };
 
+interface BotResponse {
+    keywords: string[];
+    response: string;
+}
+
+const botResponses: BotResponse[] = mockBotResponses[0];
+
 export function ChatbotInterface() {
     const [messages, setMessages] = useState<Message[]>([
         {
             id: '1',
-            content: "Hi there! I'm the FURIA FAQ Bot. How can I help you today?",
+            content: "Olá! Sou o FURIA FAQ BOT. Como posso te ajudar hoje?",
             sender: 'bot',
             timestamp: new Date(),
         },
@@ -43,10 +51,10 @@ export function ChatbotInterface() {
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     const suggestedQuestions = [
-        'When is the next match?',
-        'Who is the top fragger?',
-        'Latest tournament results?',
-        'Team roster?',
+        'Quando é o próximo jogo?',
+        'Quem é o top fragger da FURIA atualmente?',
+        'Qual foi o resultado do último torneio?',
+        'Qual é o elenco atual da equipe?',
     ];
 
     const scrollToBottom = () => {
@@ -98,7 +106,7 @@ export function ChatbotInterface() {
     const getBotResponse = (message: string): string => {
         const lowerMessage = message.toLowerCase();
 
-        for (const response of mockBotResponses) {
+        for (const response of botResponses) {
             for (const keyword of response.keywords) {
                 if (lowerMessage.includes(keyword)) {
                     return response.response;
@@ -106,19 +114,30 @@ export function ChatbotInterface() {
             };
         };
 
-        return "I'm not sure about that.Try asking about match schedules, player stats, or team information."
+        return "Não tenho a certeza disso. Tente perguntar sobre calendários de jogos, estatísticas de jogadores ou informações sobre a equipa, mas caso eu não ache essas informações você pode conversar com o nosso Contato Inteligênte pelo Whatsapp!"
     };
 
     return (
         <S.ChatbotContainer>
             <S.ChatbotHeader>
-                <S.BotIcon>
-                    <Bot size={24} color='black' />
-                </S.BotIcon>
-                <S.BotInfo>
-                    <S.BotTitle>FURIA FAQ BOT</S.BotTitle>
-                    <S.BotDescription>Ask me anything about FURIA CS:GO team</S.BotDescription>
-                </S.BotInfo>
+                <S.HeaderLeft>
+                    <S.BotIcon>
+                        <Bot size={24} color="black" />
+                    </S.BotIcon>
+                    <S.BotInfo>
+                        <S.BotTitle>FURIA FAQ BOT</S.BotTitle>
+                        <S.BotDescription>Ask me anything about FURIA CS:GO team</S.BotDescription>
+                    </S.BotInfo>
+                </S.HeaderLeft>
+
+                <S.WhatsAppButton
+                    href="https://api.whatsapp.com/send/?phone=5511993404466&text&type=phone_number&app_absent=0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <MessageSquare size={16} />
+                    CONTATO INTELIGENTE
+                </S.WhatsAppButton>
             </S.ChatbotHeader>
 
             <S.MessagesContainer>
@@ -144,7 +163,7 @@ export function ChatbotInterface() {
             <S.InputContainer>
                 <S.MessageInput
                     type='text'
-                    placeholder='Ask a question...'
+                    placeholder='Faça uma pergunta...'
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
