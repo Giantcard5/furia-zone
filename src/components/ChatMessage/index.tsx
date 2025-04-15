@@ -32,7 +32,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
         minute: '2-digit',
     });
 
-    return (
+    return message.user && (
         <S.MessageContainer $isModerator={message.user.isModerator}>
             <S.AvatarContainer>
                 {message.user.avatar.length > 0 ? (
@@ -55,4 +55,4 @@ export function ChatMessage({ message }: ChatMessageProps) {
             </S.MessageContent>
         </S.MessageContainer>
     );
-}
+};

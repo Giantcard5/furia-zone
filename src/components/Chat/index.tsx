@@ -16,43 +16,89 @@ import {
 } from '@/components/ChatMessage';
 
 import {
-    mockMessages
-} from '@/lib/mock-data';
+    apiService
+} from '@/lib/api-service';
 
 import * as S from './styles';
 
+interface Message {
+    id: string;
+    user: {
+        id: string;
+        name: string;
+        avatar: string;
+        isModerator: boolean;
+    };
+    content: string;
+    timestamp: string;
+};
+
+interface ApiResponse {
+    data: Message[];
+    error?: string;
+};
+
 export function ChatInterface() {
-    const [messages, setMessages] = useState(mockMessages);
+    const [messages, setMessages] = useState<Message[]>([]);
     const [newMessage, setNewMessage] = useState('');
+    const [loading, setLoading] = useState(true);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
-    const handleSendMessage = () => {
-        if (newMessage.trim() === '') return;
-
-        const message = {
-            id: Date.now().toString(),
-            user: {
-                id: 'current-user',
-                name: 'You',
-                avatar: '/default-user.svg',
-                isModerator: false,
-            },
-            content: newMessage,
-            timestamp: new Date().toISOString(),
+    useEffect(() => {
+        async function fetchMessages() {
+            try {
+                const response = await apiService.getMessages() as ApiResponse;
+                if (response.error) {
+                    throw new Error(response.error);
+                }
+                setMessages(response.data);
+            } catch (err) {
+                console.error('Error fetching messages:', err);
+            } finally {
+                setLoading(false);
+            };
         };
 
-        setMessages([...messages, message]);
-        setNewMessage('');
+        fetchMessages();
+    }, []);
+
+    const handleSendMessage = async () => {
+        if (newMessage.trim() === '') return;
+
+        try {
+            const response = await apiService.postMessage({
+                id: Date.now().toString(),
+                user: {
+                    id: 'current-user',
+                    name: 'You',
+                    avatar: '/default-user.svg',
+                    isModerator: false,
+                },
+                content: newMessage,
+                timestamp: new Date().toISOString(),
+            });
+            if (response.error) {
+                throw new Error(response.error);
+            };
+            setNewMessage('');
+
+            const messagesResponse = await apiService.getMessages() as ApiResponse;
+            if (!messagesResponse.error) {
+                setMessages(messagesResponse.data);
+            };
+        } catch (err) {
+            console.error('Error sending message:', err);
+        };
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === 'Enter') {
-            handleSendMessage()
+            handleSendMessage();
         };
     };
 
     useEffect(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages]);
 
     return (
@@ -63,9 +109,11 @@ export function ChatInterface() {
             </S.ChatHeader>
 
             <S.MessagesContainer>
-                {messages.map((message) => (
-                    <ChatMessage key={message.id} message={message} />
-                ))}
+                {loading && (
+                    messages.map((message, index) => (
+                        <ChatMessage key={message.id + index} message={message} />
+                    ))
+                )}
                 <div ref={messagesEndRef} />
             </S.MessagesContainer>
 

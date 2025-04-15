@@ -1,8 +1,20 @@
-const API_BASE_URL = 'http://localhost:3001/api/hltv';
+const API_BASE_URL = 'http://localhost:3001/api';
 
 interface ApiResponse<T> {
     data: T;
     error?: string;
+};
+
+interface Message {
+    id: string;
+    user: {
+        id: string;
+        name: string;
+        avatar: string;
+        isModerator: boolean;
+    };
+    content: string;
+    timestamp: string;
 };
 
 async function fetchApi<T>(endpoint: string, options: RequestInit = {}): Promise<ApiResponse<T>> {
@@ -32,10 +44,20 @@ async function fetchApi<T>(endpoint: string, options: RequestInit = {}): Promise
 
 export const apiService = {
     getTeamData: async (teamId: string) => {
-        return fetchApi(`/teams/${teamId}`);
+        return fetchApi(`/hltv/teams/${teamId}`);
     },
 
     getPlayerData: async (playerId: number) => {
-        return fetchApi(`/players/${playerId}`);
+        return fetchApi(`/hltv/players/${playerId}`);
+    },
+
+    getMessages: async () => {
+        return fetchApi('/chat/messages');
+    },
+    postMessage: async (message: Message) => {
+        return fetchApi('/chat/messages', {
+            method: 'POST',
+            body: JSON.stringify({ ...message }),
+        });
     },
 }; 

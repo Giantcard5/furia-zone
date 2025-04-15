@@ -92,7 +92,7 @@ const OnlineCount = styled.div`
     color: ${({ theme }) => theme.colors.text.secondary};
     margin-top: 0.25rem;
     font-family: 'Space Mono', monospace;
-`;;
+`;
 
 export {
     ChatContainer,
