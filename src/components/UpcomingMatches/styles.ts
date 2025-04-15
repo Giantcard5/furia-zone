@@ -166,6 +166,57 @@ const FuriaTeam = styled(TeamName)`
     color: ${({ theme }) => theme.colors.primary};
 `;
 
+const NoMatchesContainer = styled.div`
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    padding: 3rem 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+`
+
+const NoMatchesIcon = styled.div`
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+    opacity: 0.7;
+    
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+`
+
+const NoMatchesTitle = styled.h3`
+    font-family: 'Space Mono', monospace;
+    font-size: 1.5rem;
+    color: ${({ theme }) => theme.colors.primary};
+    margin: 0;
+    letter-spacing: 0.05em;
+`
+
+const NoMatchesText = styled.p`
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    color: ${({ theme }) => theme.colors.text.secondary};
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+`
+
+const TournamentStatus = styled.div`
+    background-color: rgba(212, 175, 55, 0.1);
+    padding: 0.75rem 1.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.875rem;
+    color: ${({ theme }) => theme.colors.text.secondary};
+    margin-top: 1rem;
+    border-left: 3px solid ${({ theme }) => theme.colors.primary};
+`;
+
 export {
     SectionTitle,
     UpcomingMatchesContainer,
@@ -182,5 +233,10 @@ export {
     MatchDate,
     MatchFooter,
     MatchDetail,
-    FuriaTeam
+    FuriaTeam,
+    NoMatchesContainer,
+    NoMatchesIcon,
+    NoMatchesTitle,
+    NoMatchesText,
+    TournamentStatus
 };
