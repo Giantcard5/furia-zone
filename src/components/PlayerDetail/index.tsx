@@ -82,7 +82,6 @@ export function PlayerDetail() {
                 }
 
                 const playerData = response.data as PlayerData;
-                console.log(playerData);
                 setPlayer(playerData);
             } catch (err) {
                 console.error('Error fetching player data:', err);

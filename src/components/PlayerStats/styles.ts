@@ -12,19 +12,19 @@ const TeamStatsContainer = styled.div`
     border: 1px solid rgba(212, 175, 55, 0.1);
 `;
 
-const TeamHeader = styled.div<{ isFuria?: boolean }>`
-    background-color: ${(props) => (props.isFuria ? 'rgba(212, 175, 55, 0.1)' : 'rgba(0, 0, 0, 0.3)')};
+const TeamHeader = styled.div<{ $isFuria?: boolean }>`
+    background-color: ${(props) => (props.$isFuria ? 'rgba(212, 175, 55, 0.1)' : 'rgba(0, 0, 0, 0.3)')};
     padding: 1rem;
     border-bottom: 1px solid rgba(212, 175, 55, 0.1);
 `;
 
-const TeamName = styled.h3<{ isFuria?: boolean }>`
+const TeamName = styled.h3<{ $isFuria?: boolean }>`
     font-size: 1.25rem;
     font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
     margin: 0;
     font-family: 'Space Mono', monospace;
     letter-spacing: 0.05em;
-    color: ${({ theme, isFuria }) => isFuria ? theme.colors.primary : 'white'};
+    color: ${({ theme, $isFuria }) => $isFuria ? theme.colors.primary : 'white'};
 `;
 
 const StatsTable = styled.div`

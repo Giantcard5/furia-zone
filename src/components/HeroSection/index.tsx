@@ -28,7 +28,7 @@ export function HeroSection() {
         },
         {
             title: 'UPCOMING MATCHES',
-            description: 'Stay updated with FURIA’s upcoming matches, including dates, times, and opponents.',
+            description: 'Stay updated with FURIA\'s upcoming matches, including dates, times, and opponents.',
         },
         {
             title: 'FAQ BOT',
@@ -50,7 +50,7 @@ export function HeroSection() {
                 Connect with other FURIA fans, follow live matches, and get the latest updates about your favorite CS:GO team.
             </S.HeroSubtitle>
 
-            <Link href='/live-match' passHref>
+            <Link href="/live-match" passHref>
                 <S.CTAButton>
                     CHECK LIVE MATCH <ArrowRight size={18} />
                 </S.CTAButton>

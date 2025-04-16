@@ -47,11 +47,13 @@ export function Sidebar({ $isOpen, onClose }: SidebarProps) {
                 </S.SidebarHeader>
                 <S.NavList>
                     {navItems.map((item) => (
-                        <Link href={item.path} key={item.path} onClick={onClose}>
-                            <S.NavItem $isActive={pathname === item.path}>
-                                <S.NavIcon>{item.icon}</S.NavIcon>
-                                <S.NavText>{item.label}</S.NavText>
-                            </S.NavItem>
+                        <Link href={item.path} passHref key={item.path} onClick={onClose}>
+                            <div style={{ textDecoration: 'none', color: 'inherit' }}>
+                                <S.NavItem $isActive={pathname === item.path}>
+                                    <S.NavIcon>{item.icon}</S.NavIcon>
+                                    <S.NavText>{item.label}</S.NavText>
+                                </S.NavItem>
+                            </div>
                         </Link>
                     ))}
                 </S.NavList>

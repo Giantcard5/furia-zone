@@ -45,7 +45,7 @@ const HeroSubtitle = styled.p`
     }
 `;
 
-const CTAButton = styled.a`
+const CTAButton = styled.div`
     display: inline-flex;
     align-items: center;
     background-color: transparent;

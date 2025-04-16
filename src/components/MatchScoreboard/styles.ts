@@ -15,13 +15,13 @@ const TeamsContainer = styled.div`
     }
 `;
 
-const TeamSection = styled.div<{ isLeft?: boolean }>`
+const TeamSection = styled.div<{ $isLeft?: boolean }>`
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 2rem 1rem;
-    background-color: ${(props) => (props.isLeft ? "rgba(212, 175, 55, 0.05)" : "transparent")};
+    background-color: ${(props) => (props.$isLeft ? "rgba(212, 175, 55, 0.05)" : "transparent")};
     
     @media (min-width: 768px) {
         padding: 3rem 2rem;
@@ -52,10 +52,10 @@ const TeamName = styled.h2`
     }
 `;
 
-const TeamScore = styled.div<{ isWinning?: boolean }>`
+const TeamScore = styled.div<{ $isWinning?: boolean }>`
     font-size: 3rem;
     font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
-    color: ${(props) => (props.isWinning ? ({ theme }) => theme.colors.primary : "white")};
+    color: ${(props) => (props.$isWinning ? ({ theme }) => theme.colors.primary : "white")};
     font-family: 'Space Mono', monospace;
     
     @media (min-width: 768px) {

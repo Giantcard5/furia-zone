@@ -38,8 +38,8 @@ export function PlayerStats({ matchData }: PlayerStatsProps) {
         <S.StatsContainer>
             {matchData.teams.map((team, index) => (
                 <S.TeamStatsContainer key={team.id}>
-                    <S.TeamHeader isFuria={team.name === 'FURIA'}>
-                        <S.TeamName isFuria={team.name === 'FURIA'}>{team.name}</S.TeamName>
+                    <S.TeamHeader $isFuria={team.name === 'FURIA'}>
+                        <S.TeamName $isFuria={team.name === 'FURIA'}>{team.name}</S.TeamName>
                     </S.TeamHeader>
 
                     <S.StatsTable>

@@ -38,17 +38,18 @@ export function MatchScoreboard({ matchData }: MatchScoreboardProps) {
     return (
         <S.ScoreboardContainer>
             <S.TeamsContainer>
-                <S.TeamSection isLeft={true}>
+                <S.TeamSection $isLeft={true}>
                     <S.TeamLogo>
                         <Image
                             src={team1.logo || 'https://www.hltv.org/img/static/team/placeholder.svg'}
                             alt={team1.name}
                             fill
+                            sizes="(max-width: 768px) 80px, 120px"
                             style={{ objectFit: 'contain' }}
                         />
                     </S.TeamLogo>
                     <S.TeamName>{team1.name}</S.TeamName>
-                    <S.TeamScore isWinning={isTeam1Winning}>{team1.score}</S.TeamScore>
+                    <S.TeamScore $isWinning={isTeam1Winning}>{team1.score}</S.TeamScore>
                 </S.TeamSection>
 
                 <S.ScoreSeparator>
@@ -65,7 +66,7 @@ export function MatchScoreboard({ matchData }: MatchScoreboardProps) {
                         />
                     </S.TeamLogo>
                     <S.TeamName>{team2.name}</S.TeamName>
-                    <S.TeamScore isWinning={isTeam2Winning}>{team2.score}</S.TeamScore>
+                    <S.TeamScore $isWinning={isTeam2Winning}>{team2.score}</S.TeamScore>
                 </S.TeamSection>
             </S.TeamsContainer>
 
