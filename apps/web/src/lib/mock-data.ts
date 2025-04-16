@@ -67,6 +67,10 @@ export const mockMessages = [
     },
 ];
 
+export const matchStatus = {
+    isLive: false
+};
+
 export const mockMatchData = {
     id: "match-1",
     teams: [
@@ -229,6 +233,75 @@ export const mockMatchData = {
         name: "PGL Major Copenhagen 2024",
         logo: "https://www.hltv.org/img/static/team/placeholder.svg",
     },
+};
+
+export const mockLastMatchData = {
+    id: "last-match-1",
+    date: "April 12, 2024",
+    result: "win",
+    teams: [
+        {
+            id: "team-1",
+            name: "FURIA",
+            logo: "/icon-black.png",
+            score: 16,
+        },
+        {
+            id: "team-2",
+            name: "Cloud9",
+            logo: "https://www.hltv.org/img/static/team/placeholder.svg",
+            score: 12,
+        },
+    ],
+    maps: [
+        {
+            name: "Inferno",
+            score: [16, 12],
+        },
+        {
+            name: "Nuke",
+            score: [13, 16],
+        },
+        {
+            name: "Mirage",
+            score: [16, 10],
+        },
+    ],
+    tournament: {
+        name: "ESL Pro League Season 19",
+        logo: "https://www.hltv.org/img/static/team/placeholder.svg",
+    },
+    mvp: {
+        id: "player-2",
+        name: "Kaike Cerato",
+        nickname: "KSCERATO",
+        avatar: "/players/kscerato.webp",
+        stats: {
+            kills: 68,
+            deaths: 42,
+            rating: 1.47,
+        },
+    },
+    highlights: [
+        {
+            id: "highlight-last-1",
+            title: "KSCERATO ace on Inferno",
+            thumbnail: "https://www.hltv.org/img/static/team/placeholder.svg",
+            time: "Map 1, Round 24",
+        },
+        {
+            id: "highlight-last-2",
+            title: "yuurih clutch 1v3 on Mirage",
+            thumbnail: "https://www.hltv.org/img/static/team/placeholder.svg",
+            time: "Map 3, Round 18",
+        },
+        {
+            id: "highlight-last-3",
+            title: "arT aggressive AWP play on Nuke",
+            thumbnail: "https://www.hltv.org/img/static/team/placeholder.svg",
+            time: "Map 2, Round 12",
+        },
+    ],
 };
 
 export const mockHighlights = [

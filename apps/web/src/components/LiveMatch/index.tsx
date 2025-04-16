@@ -1,23 +1,23 @@
 'use client'
 
-import { 
-    useState 
+import {
+    useState
 } from 'react';
 
 import * as S from './styles';
 
-import { 
-    MatchScoreboard 
+import {
+    MatchScoreboard
 } from '@/components/MatchScoreboard';
-import { 
-    PlayerStats 
+import {
+    PlayerStats
 } from '@/components/PlayerStats';
-import { 
-    GameHighlights 
+import {
+    GameHighlights
 } from '@/components/GameHightlights';
 
-import { 
-    mockMatchData 
+import {
+    mockMatchData
 } from '@/lib/mock-data';
 
 export function LiveMatchStatus() {

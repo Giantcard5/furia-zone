@@ -1,8 +1,8 @@
 'use client';
 
-import { 
-    useEffect, 
-    useState 
+import {
+    useEffect,
+    useState
 } from 'react';
 
 import {
@@ -23,6 +23,10 @@ import {
 
 import * as S from './styles';
 
+import { 
+    matchStatus 
+} from '@/lib/mock-data';
+
 interface SidebarProps {
     $isOpen: boolean
     onClose: () => void
@@ -31,16 +35,18 @@ interface SidebarProps {
 export function Sidebar({ $isOpen, onClose }: SidebarProps) {
     const [isMounted, setIsMounted] = useState(false);
     const pathname = usePathname();
-  
+
+    const isLive = matchStatus.isLive;
+
     useEffect(() => {
-      setIsMounted(true);
+        setIsMounted(true);
     }, []);
-  
+
     if (!isMounted) return null;
 
     const navItems = [
         { path: '/', label: 'HOME', icon: <Home size={18} /> },
-        { path: '/live-match', label: 'LIVE MATCH', icon: <Trophy size={18} /> },
+        { path: '/live-match', label: 'LIVE MATCH', icon: <Trophy size={18} />, showLiveIndicator: isLive },
         { path: '/chat', label: 'FAN CHAT', icon: <MessageSquare size={18} /> },
         { path: '/team-info', label: 'TEAM INFO', icon: <Users size={18} /> },
         { path: '/upcoming-matches', label: 'UPCOMING MATCHES', icon: <Calendar size={18} /> },
@@ -63,7 +69,10 @@ export function Sidebar({ $isOpen, onClose }: SidebarProps) {
                             <div style={{ textDecoration: 'none', color: 'inherit' }}>
                                 <S.NavItem $isActive={pathname === item.path}>
                                     <S.NavIcon>{item.icon}</S.NavIcon>
-                                    <S.NavText>{item.label}</S.NavText>
+                                    <S.NavText>
+                                        {item.label}
+                                        {item.showLiveIndicator && <S.LiveIndicator />}
+                                    </S.NavText>
                                 </S.NavItem>
                             </div>
                         </Link>

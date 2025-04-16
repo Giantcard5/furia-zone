@@ -128,7 +128,7 @@ export function ChatbotInterface() {
                     </S.BotIcon>
                     <S.BotInfo>
                         <S.BotTitle>FURIA FAQ BOT</S.BotTitle>
-                        <S.BotDescription>Ask me anything about FURIA CS:GO team</S.BotDescription>
+                        <S.BotDescription>Me pergunte qualquer coisa sobre o time da FURIA de CS2</S.BotDescription>
                     </S.BotInfo>
                 </S.HeaderLeft>
 

@@ -5,11 +5,20 @@ import {
 import {
     LiveMatchStatus
 } from '@/components/LiveMatch';
+import { 
+    LastMatchResult 
+} from '@/components/LastMatchResult';
+
+import {
+    matchStatus
+} from '@/lib/mock-data';
 
 export default function LiveMatchPage() {
+    const isLive = matchStatus.isLive;
+
     return (
         <MainLayout>
-            <LiveMatchStatus />
+            {isLive ? <LiveMatchStatus /> : <LastMatchResult />}
         </MainLayout>
     );
 };

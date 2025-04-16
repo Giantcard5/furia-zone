@@ -70,26 +70,51 @@ const NavItem = styled.div<{ $isActive: boolean }>`
     margin: 0.25rem 0;
     display: flex;
     align-items: center;
-    color: ${(props) => (props.$isActive ? ({ theme }) => theme.colors.primary : 'white')};
-    background-color: ${(props) => (props.$isActive ? 'rgba(212, 175, 55, 0.05)' : 'transparent')};
-    border-left: 3px solid ${(props) => (props.$isActive ? ({ theme }) => theme.colors.primary : 'transparent')};
+    color: ${(props) => (props.$isActive ? ({ theme }) => theme.colors.primary : "white")};
+    background-color: ${(props) => (props.$isActive ? "rgba(212, 175, 55, 0.05)" : "transparent")};
+    border-left: 3px solid ${(props) => (props.$isActive ? ({ theme }) => theme.colors.primary : "transparent")};
     transition: all 0.2s ease;
     
     &:hover {
         background-color: rgba(255, 255, 255, 0.05);
     }
-`;
+`
 
 const NavIcon = styled.span`
     margin-right: 0.75rem;
     display: flex;
     align-items: center;
-`;
+`
 
 const NavText = styled.span`
     font-size: 0.875rem;
     letter-spacing: 0.05em;
     font-family: 'Space Mono', monospace;
+    display: flex;
+    align-items: center;
+`;
+
+const LiveIndicator = styled.span`
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: ${({ theme }) => theme.colors.primary};
+    border-radius: 50%;
+    margin-left: 0.5rem;
+    animation: pulse 1.5s infinite;
+    
+    @keyframes pulse {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
 `;
 
 const Overlay = styled.div<{ $isOpen: boolean }>`
@@ -130,6 +155,7 @@ export {
     NavItem,
     NavIcon,
     NavText,
+    LiveIndicator,
     Overlay,
     SidebarFooter,
     GoldText,
