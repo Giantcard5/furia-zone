@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Furia Zone
+
+This is a monorepo for the Furia Zone project, containing both the front-end (Next.js) and the API (Express/TypeScript) applications.
+
+## Project Structure
+
+```
+furia-zone/
+├── apps/
+│   ├── web/   # Front-end (Next.js)
+│   └── api/   # Back-end API (Express)
+├── package.json
+├── tsconfig.json
+└── README.md
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- [Yarn](https://yarnpkg.com/) (v1)
+
+### Install dependencies
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Run both front-end and API in development mode
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn dev
+```
+- Front-end: [http://localhost:3000](http://localhost:3000)
+- API: [http://localhost:3001](http://localhost:3001) (default, see `.env` in `apps/api`)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Run only one app
 
-## Learn More
+```bash
+yarn dev:web   # Front-end only
+yarn dev:api   # API only
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Build both apps
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+yarn build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Start both apps in production mode
 
-## Deploy on Vercel
+```bash
+yarn start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Environment Variables
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- API: Create a `.env` file in `apps/api/` (see `apps/api/README.md` for details)
+  - Example:
+    ```
+    PORT=3001
+    ```
+- Front-end: Configure as needed in `apps/web/`
+
+## Scripts
+
+- `yarn dev` - Run both front-end and API in development mode
+- `yarn build` - Build both front-end and API
+- `yarn start` - Start both front-end and API in production mode
+- `yarn dev:web` / `yarn dev:api` - Run only the front-end or API in dev mode
+- `yarn build:web` / `yarn build:api` - Build only the front-end or API
+- `yarn start:web` / `yarn start:api` - Start only the front-end or API in production
+
+## Technologies Used
+
+- **Front-end:** [Next.js](https://nextjs.org/), React, Styled Components
+- **API:** [Express](https://expressjs.com/), TypeScript, HLTV API
+- **Monorepo:** Yarn Workspaces
+
+## More Info
+
+- See `apps/web/README.md` for front-end details
+- See `apps/api/README.md` for API details and endpoints 
