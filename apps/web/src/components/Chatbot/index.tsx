@@ -12,6 +12,8 @@ import {
     MessageSquare
 } from 'lucide-react';
 
+import moment from 'moment';
+
 import {
     ChatbotMessage
 } from '@/components/ChatbotMessage';
@@ -26,7 +28,7 @@ interface Message {
     id: string
     content: string
     sender: 'user' | 'bot'
-    timestamp: Date
+    timestamp: moment.Moment
     isTyping?: boolean
 };
 
@@ -43,7 +45,7 @@ export function ChatbotInterface() {
             id: '1',
             content: "Olá! Sou o FURIA FAQ BOT. Como posso te ajudar hoje?",
             sender: 'bot',
-            timestamp: new Date(),
+            timestamp: moment(),
         },
     ])
     const [input, setInput] = useState('');
@@ -69,10 +71,10 @@ export function ChatbotInterface() {
         if (input.trim() === '') return;
 
         const userMessage: Message = {
-            id: Date.now().toString(),
+            id: moment().toISOString(),
             content: input,
             sender: 'user',
-            timestamp: new Date(),
+            timestamp: moment(),
         };
 
         setMessages((prev) => [...prev, userMessage]);
@@ -82,10 +84,10 @@ export function ChatbotInterface() {
         setTimeout(() => {
             const botResponse = getBotResponse(input);
             const botMessage: Message = {
-                id: (Date.now() + 1).toString(),
+                id: moment().toISOString(),
                 content: botResponse,
                 sender: 'bot',
-                timestamp: new Date(),
+                timestamp: moment(),
             };
 
             setMessages((prev) => [...prev, botMessage]);
@@ -151,7 +153,7 @@ export function ChatbotInterface() {
                             id: 'typing',
                             content: 'typing...',
                             sender: 'bot',
-                            timestamp: new Date(),
+                            timestamp: moment(),
                             isTyping: true,
                         }}
                     />

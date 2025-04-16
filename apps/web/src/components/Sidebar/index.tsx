@@ -1,4 +1,9 @@
-'use client'
+'use client';
+
+import { 
+    useEffect, 
+    useState 
+} from 'react';
 
 import {
     usePathname
@@ -24,7 +29,14 @@ interface SidebarProps {
 };
 
 export function Sidebar({ $isOpen, onClose }: SidebarProps) {
+    const [isMounted, setIsMounted] = useState(false);
     const pathname = usePathname();
+  
+    useEffect(() => {
+      setIsMounted(true);
+    }, []);
+  
+    if (!isMounted) return null;
 
     const navItems = [
         { path: '/', label: 'HOME', icon: <Home size={18} /> },

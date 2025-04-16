@@ -1,15 +1,17 @@
 'use client'
 
-import React, { 
-    useState, 
-    useRef, 
-    useEffect 
+import React, {
+    useState,
+    useRef,
+    useEffect
 } from 'react';
 
-import { 
-    Send, 
-    Smile 
+import {
+    Send,
+    Smile
 } from 'lucide-react';
+
+import moment from 'moment';
 
 import {
     ChatMessage
@@ -21,7 +23,7 @@ import {
 
 import * as S from './styles';
 
-interface Message {
+interface ApiMessage {
     id: string;
     user: {
         id: string;
@@ -33,8 +35,20 @@ interface Message {
     timestamp: string;
 };
 
+interface Message {
+    id: string;
+    user: {
+        id: string;
+        name: string;
+        avatar: string;
+        isModerator: boolean;
+    };
+    content: string;
+    timestamp: moment.Moment;
+};
+
 interface ApiResponse {
-    data: Message[];
+    data: ApiMessage[];
     error?: string;
 };
 
@@ -42,7 +56,12 @@ export function ChatInterface() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [newMessage, setNewMessage] = useState('');
     const [loading, setLoading] = useState(true);
+    const [isMounted, setIsMounted] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     useEffect(() => {
         async function fetchMessages() {
@@ -50,8 +69,15 @@ export function ChatInterface() {
                 const response = await apiService.getMessages() as ApiResponse;
                 if (response.error) {
                     throw new Error(response.error);
-                }
-                setMessages(response.data);
+                };
+
+                const messagesWithMoment = response.data.map(apiMessage => ({
+                    id: apiMessage.id,
+                    user: apiMessage.user,
+                    content: apiMessage.content,
+                    timestamp: moment(apiMessage.timestamp)
+                }));
+                setMessages(messagesWithMoment);
             } catch (err) {
                 console.error('Error fetching messages:', err);
             } finally {
@@ -62,12 +88,18 @@ export function ChatInterface() {
         fetchMessages();
     }, []);
 
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
+
+    if (!isMounted) return null;
+
     const handleSendMessage = async () => {
         if (newMessage.trim() === '') return;
 
         try {
-            const response = await apiService.postMessage({
-                id: Date.now().toString(),
+            const apiMessage: ApiMessage = {
+                id: moment().toISOString(),
                 user: {
                     id: 'current-user',
                     name: 'You',
@@ -75,16 +107,30 @@ export function ChatInterface() {
                     isModerator: false,
                 },
                 content: newMessage,
-                timestamp: new Date().toISOString(),
-            });
+                timestamp: moment().toISOString(),
+            };
+
+            const response = await apiService.postMessage(apiMessage);
             if (response.error) {
                 throw new Error(response.error);
             };
             setNewMessage('');
 
+            const optimisticMessage: Message = {
+                ...apiMessage,
+                timestamp: moment(apiMessage.timestamp)
+            };
+            setMessages(prev => [...prev, optimisticMessage]);
+
             const messagesResponse = await apiService.getMessages() as ApiResponse;
             if (!messagesResponse.error) {
-                setMessages(messagesResponse.data);
+                const messagesWithMoment = messagesResponse.data.map(apiMessage => ({
+                    id: apiMessage.id,
+                    user: apiMessage.user,
+                    content: apiMessage.content,
+                    timestamp: moment(apiMessage.timestamp)
+                }));
+                setMessages(messagesWithMoment);
             };
         } catch (err) {
             console.error('Error sending message:', err);
@@ -97,10 +143,6 @@ export function ChatInterface() {
         };
     };
 
-    useEffect(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, [messages]);
-
     return (
         <S.ChatContainer>
             <S.ChatHeader>
@@ -109,11 +151,9 @@ export function ChatInterface() {
             </S.ChatHeader>
 
             <S.MessagesContainer>
-                {loading && (
-                    messages.map((message, index) => (
-                        <ChatMessage key={message.id + index} message={message} />
-                    ))
-                )}
+                {!loading && messages.map((message) => (
+                    <ChatMessage key={message.id} message={message} />
+                ))}
                 <div ref={messagesEndRef} />
             </S.MessagesContainer>
 

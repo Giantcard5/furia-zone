@@ -5,22 +5,22 @@ import React, {
     useEffect
 } from 'react';
 
-import { 
-    Sidebar 
-} from '../Sidebar';
+import dynamic from 'next/dynamic';
+
+const Sidebar = dynamic(() => import('../Sidebar').then(mod => mod.Sidebar), { ssr: false });
 
 import * as S from './styles';
 
 export function MainLayout({ children }: { children: React.ReactNode }) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-    const toggleSidebar = () => {
-        setIsSidebarOpen(!isSidebarOpen);
-    };
+    const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
         setIsSidebarOpen(false);
+        setIsMounted(true);
     }, []);
+
+    if (!isMounted) return null;
 
     return (
         <S.LayoutContainer>

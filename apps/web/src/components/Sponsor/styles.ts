@@ -5,7 +5,7 @@ const SponsorContainer = styled.div`
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    padding: 1rem 0;
+    padding: .5rem 0;
     margin-bottom: 2rem;
     opacity: 0.7;
     overflow-x: auto;

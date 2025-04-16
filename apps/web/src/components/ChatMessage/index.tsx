@@ -6,6 +6,8 @@ import {
     User as UserIcon,
 } from 'lucide-react';
 
+import moment from 'moment';
+
 import * as S from './styles';
 
 interface User {
@@ -19,7 +21,7 @@ interface Message {
     id: string
     user: User
     content: string
-    timestamp: string
+    timestamp: moment.Moment
 };
 
 interface ChatMessageProps {
@@ -27,10 +29,7 @@ interface ChatMessageProps {
 };
 
 export function ChatMessage({ message }: ChatMessageProps) {
-    const formattedTime = new Date(message.timestamp).toLocaleTimeString([], {
-        hour: '2-digit',
-        minute: '2-digit',
-    });
+    const formattedTime = message.timestamp.format('HH:mm');
 
     return message.user && (
         <S.MessageContainer $isModerator={message.user.isModerator}>

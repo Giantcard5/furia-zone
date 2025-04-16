@@ -1,4 +1,9 @@
-'use client'
+'use client';
+
+import { 
+    useEffect, 
+    useState 
+} from 'react';
 
 import Link from 'next/link';
 
@@ -13,6 +18,14 @@ import {
 } from '../Sponsor';
 
 export function HeroSection() {
+    const [isMounted, setIsMounted] = useState(false);
+  
+    useEffect(() => {
+      setIsMounted(true);
+    }, []);
+  
+    if (!isMounted) return null;
+    
     const features = [
         {
             title: 'LIVE MATCH UPDATES',

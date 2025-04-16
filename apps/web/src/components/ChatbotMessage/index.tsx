@@ -7,24 +7,23 @@ import {
 
 import * as S from './styles';
 
+import moment from 'moment';
+
 interface Message {
-    id: string
-    content: string
-    sender: 'user' | 'bot'
-    timestamp: Date
-    isTyping?: boolean
+    id: string;
+    content: string;
+    sender: 'user' | 'bot';
+    timestamp: moment.Moment;
+    isTyping?: boolean;
 };
 
 interface ChatbotMessageProps {
-    message: Message
+    message: Message;
 };
 
 export function ChatbotMessage({ message }: ChatbotMessageProps) {
     const isUser = message.sender === 'user';
-    const formattedTime = message.timestamp.toLocaleTimeString([], {
-        hour: '2-digit',
-        minute: '2-digit',
-    });
+    const formattedTime = message.timestamp.format('HH:mm');
 
     return (
         <S.MessageContainer $isUser={isUser}>
