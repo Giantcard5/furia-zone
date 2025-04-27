@@ -18,15 +18,18 @@ import {
     Trophy,
     Users,
     HelpCircle,
-    Calendar
+    Calendar,
+    User
 } from 'lucide-react';
 
 import * as S from './styles';
 
-import { 
-    matchStatus 
+import {
+    matchStatus
 } from '@/lib/mock-data';
-
+import { 
+    useAuth 
+} from '@/hooks/useAuth';
 interface SidebarProps {
     $isOpen: boolean
     onClose: () => void
@@ -35,6 +38,7 @@ interface SidebarProps {
 export function Sidebar({ $isOpen, onClose }: SidebarProps) {
     const [isMounted, setIsMounted] = useState(false);
     const pathname = usePathname();
+    const { user, isAuthenticated } = useAuth();
 
     const isLive = matchStatus.isLive;
 
@@ -78,9 +82,21 @@ export function Sidebar({ $isOpen, onClose }: SidebarProps) {
                         </Link>
                     ))}
                 </S.NavList>
-                <S.SidebarFooter>
-                    <S.GoldText>FURIA</S.GoldText> | COPYRIGHT © 2025
-                </S.SidebarFooter>
+                <S.UserSection>
+                    {isAuthenticated && user ? (
+                        <S.UserInfo href="/profile">
+                            <S.UserAvatar>
+                                <User size={18} />
+                            </S.UserAvatar>
+                            <S.UserName>{user.username}</S.UserName>
+                        </S.UserInfo>
+                    ) : (
+                        <S.LoginButton href="/auth/login">
+                            <User size={16} />
+                            LOG IN
+                        </S.LoginButton>
+                    )}
+                </S.UserSection>
             </S.SidebarContainer>
             <S.Overlay $isOpen={$isOpen} onClick={onClose} />
         </>

@@ -5,6 +5,9 @@ import type {
 import {
     ThemeProvider 
 } from '@/provider/ThemeProvider';
+import { 
+    AuthProvider 
+} from '@/provider/AuthProvider';
 
 export const metadata: Metadata = {
     title: "FURIA ZONE | CS:GO Fan Platform",
@@ -29,7 +32,9 @@ export default function RootLayout({
             </head>
             <body>
                 <ThemeProvider>
-                    {children}
+                    <AuthProvider>
+                        {children}
+                    </AuthProvider>
                 </ThemeProvider>
             </body>
         </html>

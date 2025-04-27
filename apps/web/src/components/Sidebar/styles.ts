@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import Link from 'next/link';
+
 const SidebarContainer = styled.aside<{ $isOpen: boolean }>`
     position: fixed;
     top: 0;
@@ -132,7 +134,7 @@ const Overlay = styled.div<{ $isOpen: boolean }>`
     }
 `;
 
-const SidebarFooter = styled.div`
+const UserSection = styled.div`
     margin-top: auto;
     padding: 1.5rem;
     border-top: 1px solid rgba(212, 175, 55, 0.1);
@@ -141,8 +143,50 @@ const SidebarFooter = styled.div`
     text-align: center;
 `;
 
-const GoldText = styled.span`
+const UserInfo = styled(Link)`
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: white;
+    
+    &:hover {
+        color: ${({ theme }) => theme.colors.primary};
+    }
+`;
+
+const UserAvatar = styled.div`
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(212, 175, 55, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const UserName = styled.div`
+    font-family: 'Space Mono', monospace;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+`;
+
+const LoginButton = styled(Link)`
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    border: 1px solid ${({ theme }) => theme.colors.primary};
     color: ${({ theme }) => theme.colors.primary};
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    text-decoration: none;
+    transition: all ${({ theme }) => theme.transitions.fast};
+    
+    &:hover {
+        background-color: rgba(212, 175, 55, 0.1);
+    }
 `;
 
 export {
@@ -157,6 +201,9 @@ export {
     NavText,
     LiveIndicator,
     Overlay,
-    SidebarFooter,
-    GoldText,
+    UserSection,
+    UserInfo,
+    UserAvatar,
+    UserName,
+    LoginButton
 };

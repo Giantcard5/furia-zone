@@ -16,10 +16,17 @@ import moment from 'moment';
 import {
     ChatMessage
 } from '@/components/ChatMessage';
+import { 
+    AuthPrompt 
+} from '@/components/AuthPrompt';
 
 import {
     apiService
 } from '@/lib/api-service';
+
+import { 
+    useAuth 
+} from '@/hooks/useAuth';
 
 import * as S from './styles';
 
@@ -57,7 +64,10 @@ export function ChatInterface() {
     const [newMessage, setNewMessage] = useState('');
     const [loading, setLoading] = useState(true);
     const [isMounted, setIsMounted] = useState(false);
+    
     const messagesEndRef = useRef<HTMLDivElement>(null);
+
+    const { user, isAuthenticated } = useAuth();
 
     useEffect(() => {
         setIsMounted(true);
@@ -157,21 +167,25 @@ export function ChatInterface() {
                 <div ref={messagesEndRef} />
             </S.MessagesContainer>
 
-            <S.InputContainer>
-                <S.MessageInput
-                    type='text'
-                    placeholder='Type a message...'
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                />
-                <S.IconButton aria-label='Add emoji'>
-                    <Smile size={20} />
-                </S.IconButton>
-                <S.SendButton onClick={handleSendMessage} aria-label='Send message'>
-                    <Send size={20} />
-                </S.SendButton>
-            </S.InputContainer>
+            {isAuthenticated ? (
+                <S.InputContainer>
+                    <S.MessageInput
+                        type='text'
+                        placeholder='Type a message...'
+                        value={newMessage}
+                        onChange={(e) => setNewMessage(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                    />
+                    <S.IconButton aria-label='Add emoji'>
+                        <Smile size={20} />
+                    </S.IconButton>
+                    <S.SendButton onClick={handleSendMessage} aria-label='Send message'>
+                        <Send size={20} />
+                    </S.SendButton>
+                </S.InputContainer>
+            ) : (
+                <AuthPrompt/>
+            ) }
         </S.ChatContainer>
     );
 };
