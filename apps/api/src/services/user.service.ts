@@ -47,4 +47,23 @@ export class UserService {
             throw new Error('Failed to read users');
         }
     }
+
+    async updateUser(userId: string, updatedUser: User): Promise<void> {
+        try {
+            const users = await this.getAllUsers();
+            const userIndex = users.findIndex(user => user.id === userId);
+            
+            if (userIndex === -1) {
+                throw new Error('User not found');
+            }
+            
+            updatedUser.id = userId;
+            updatedUser.createdAt = users[userIndex].createdAt;
+            
+            users[userIndex] = updatedUser;
+            fs.writeFileSync(this.usersFilePath, JSON.stringify(users, null, 2));
+        } catch (error) {
+            throw new Error('Failed to update user');
+        }
+    }
 } 

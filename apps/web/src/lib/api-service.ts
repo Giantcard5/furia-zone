@@ -127,4 +127,11 @@ export const apiService = {
             body: JSON.stringify(user),
         });
     },
+    
+    updateUser: async (user: User) => {
+        return fetchApi<User>(`/users/${user.id}`, {
+            method: 'PUT',
+            body: JSON.stringify(user),
+        });
+    },
 }; 

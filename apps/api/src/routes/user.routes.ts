@@ -11,7 +11,6 @@ import {
 const router = Router();
 const userService = new UserService();
 
-// Save a new user
 router.post('/', async (req: Request, res: Response) => {
     try {
         const user = req.body;
@@ -22,7 +21,6 @@ router.post('/', async (req: Request, res: Response) => {
     }
 });
 
-// Get all users
 router.get('/', async (req: Request, res: Response) => {
     try {
         const users = await userService.getAllUsers();
@@ -32,7 +30,6 @@ router.get('/', async (req: Request, res: Response) => {
     }
 });
 
-// Check if username exists
 router.post('/check-username', async (req: Request, res: Response) => {
     try {
         const { username } = req.body;
@@ -41,6 +38,17 @@ router.post('/check-username', async (req: Request, res: Response) => {
         res.json(usernameExists);
     } catch (error) {
         res.status(500).json({ error: 'Failed to check username' });
+    }
+});
+
+router.put('/:id', async (req: Request, res: Response) => {
+    try {
+        const userId = req.params.id;
+        const updatedUser = req.body;
+        await userService.updateUser(userId, updatedUser);
+        res.json({ message: 'User updated successfully' });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to update user' });
     }
 });
 

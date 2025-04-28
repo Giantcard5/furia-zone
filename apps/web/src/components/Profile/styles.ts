@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const ProfileContainer = styled.div`
     max-width: 800px;
     margin: 0 auto;
-`;
+`
 
 const ProfileHeader = styled.div`
     display: flex;
@@ -17,7 +17,7 @@ const ProfileHeader = styled.div`
         text-align: left;
         gap: 2rem;
     }
-`;
+`
 
 const AvatarContainer = styled.div`
     position: relative;
@@ -31,11 +31,30 @@ const AvatarContainer = styled.div`
     @media (min-width: 768px) {
         margin-bottom: 0;
     }
-`;
+`
+
+const AvatarOverlay = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity ${({ theme }) => theme.transitions.fast};
+    cursor: pointer;
+    
+    &:hover {
+        opacity: 1;
+    }
+`
 
 const ProfileInfo = styled.div`
-  flex: 1;
-`;
+    flex: 1;
+`
 
 const Username = styled.h1`
     font-size: 2rem;
@@ -44,14 +63,14 @@ const Username = styled.h1`
     font-family: 'Space Mono', monospace;
     letter-spacing: 0.05em;
     color: ${({ theme }) => theme.colors.primary};
-`;
+`
 
 const Name = styled.h2`
     font-size: 1.25rem;
     font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
     margin-bottom: 1rem;
     font-family: 'Space Mono', monospace;
-`;
+`
 
 const ProfileMeta = styled.div`
     display: flex;
@@ -67,7 +86,7 @@ const MetaItem = styled.div`
     font-size: 0.875rem;
     color: ${({ theme }) => theme.colors.text.secondary};
     font-family: 'Space Mono', monospace;
-`;
+`
 
 const ModeratorBadge = styled.div`
     display: inline-flex;
@@ -81,7 +100,7 @@ const ModeratorBadge = styled.div`
     font-family: 'Space Mono', monospace;
     letter-spacing: 0.05em;
     margin-bottom: 1rem;
-`;
+`
 
 const SectionTitle = styled.h3`
     font-size: 1.25rem;
@@ -92,14 +111,17 @@ const SectionTitle = styled.h3`
     font-family: 'Space Mono', monospace;
     letter-spacing: 0.05em;
     color: ${({ theme }) => theme.colors.primary};
-`;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`
 
 const ProfileSection = styled.div`
     background-color: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(212, 175, 55, 0.1);
     padding: 1.5rem;
     margin-bottom: 2rem;
-`;
+`
 
 const LogoutButton = styled.button`
     display: flex;
@@ -116,14 +138,14 @@ const LogoutButton = styled.button`
     &:hover {
         background-color: rgba(244, 67, 54, 0.1);
     }
-`;
+`
 
 const NotLoggedIn = styled.div`
     text-align: center;
     padding: 3rem 1rem;
     background-color: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(212, 175, 55, 0.1);
-`;
+`
 
 const NotLoggedInTitle = styled.h2`
     font-size: 1.5rem;
@@ -132,12 +154,12 @@ const NotLoggedInTitle = styled.h2`
     font-family: 'Space Mono', monospace;
     letter-spacing: 0.05em;
     color: ${({ theme }) => theme.colors.primary};
-`;
+`
 
 const NotLoggedInText = styled.p`
     color: ${({ theme }) => theme.colors.text.secondary};
     margin-bottom: 1.5rem;
-`;
+`
 
 const LoginButton = styled.a`
     display: inline-flex;
@@ -153,17 +175,158 @@ const LoginButton = styled.a`
     &:hover {
         background-color: #E5C158;
     }
-`;
+`
+
+const EditButton = styled.button`
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: transparent;
+    border: none;
+    color: ${({ theme }) => theme.colors.text.secondary};
+    font-size: 0.875rem;
+    cursor: pointer;
+    
+    &:hover {
+        color: ${({ theme }) => theme.colors.primary};
+    }
+`
+
+const FormGroup = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+`
+
+const Label = styled.label`
+    font-size: 0.875rem;
+    font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
+    font-family: 'Space Mono', monospace;
+    color: ${({ theme }) => theme.colors.text.secondary};
+`
+
+const Input = styled.input`
+    padding: 0.75rem 1rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    color: white;
+    font-size: 0.875rem;
+    
+    &:focus {
+        outline: none;
+        border-color: ${({ theme }) => theme.colors.primary};
+    }
+`
+
+const ButtonGroup = styled.div`
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+`
+
+const SaveButton = styled.button`
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: ${({ theme }) => theme.colors.primary};
+    color: black;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-family: 'Space Mono', monospace;
+    cursor: pointer;
+    transition: all ${({ theme }) => theme.transitions.fast};
+    
+    &:hover {
+        background-color: #E5C158;
+    }
+`
+
+const CancelButton = styled.button`
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: transparent;
+    border: 1px solid ${({ theme }) => theme.colors.text.secondary};
+    color: ${({ theme }) => theme.colors.text.secondary};
+    padding: 0.75rem 1.5rem;
+    font-family: 'Space Mono', monospace;
+    cursor: pointer;
+    transition: all ${({ theme }) => theme.transitions.fast};
+    
+    &:hover {
+        border-color: white;
+        color: white;
+    }
+`
+
+const FileInput = styled.input`
+    display: none;
+`
+
+const MessageList = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+`
+
+const MessageItem = styled.div`
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.05);
+    
+    &:hover {
+        border-color: rgba(212, 175, 55, 0.2);
+    }
+`
+
+const MessageHeader = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+    color: ${({ theme }) => theme.colors.text.secondary};
+    font-family: 'Space Mono', monospace;
+`
+
+const MessageContent = styled.div`
+    font-size: 0.875rem;
+    color: ${({ theme }) => theme.colors.text.primary};
+`
+
+const NoMessages = styled.div`
+    text-align: center;
+    padding: 2rem;
+    color: ${({ theme }) => theme.colors.text.secondary};
+    font-style: italic;
+`
+
+const LoadingMessage = styled.div`
+    text-align: center;
+    padding: 2rem;
+    color: ${({ theme }) => theme.colors.text.secondary};
+    font-style: italic;
+`
+
+const ErrorMessage = styled.div`
+    color: #F44336;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background-color: rgba(244, 67, 54, 0.1);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    border-radius: 4px;
+`
 
 export {
     ProfileContainer,
     ProfileHeader,
     AvatarContainer,
+    AvatarOverlay,
     ProfileInfo,
     Username,
     Name,
     ProfileMeta,
-    MetaItem,
     ModeratorBadge,
     SectionTitle,
     ProfileSection,
@@ -171,5 +334,21 @@ export {
     NotLoggedIn,
     NotLoggedInTitle,
     NotLoggedInText,
-    LoginButton
-};
+    LoginButton,
+    EditButton,
+    FormGroup,
+    Label,
+    Input,
+    ButtonGroup,
+    SaveButton,
+    CancelButton,
+    FileInput,
+    MessageList,
+    MessageItem,
+    MessageHeader,
+    MessageContent,
+    NoMessages,
+    LoadingMessage,
+    MetaItem,
+    ErrorMessage
+}
