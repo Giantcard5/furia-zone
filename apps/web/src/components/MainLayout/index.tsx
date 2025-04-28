@@ -12,11 +12,9 @@ const Sidebar = dynamic(() => import('../Sidebar').then(mod => mod.Sidebar), { s
 import * as S from './styles';
 
 export function MainLayout({ children }: { children: React.ReactNode }) {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
-        setIsSidebarOpen(false);
         setIsMounted(true);
     }, []);
 
@@ -24,7 +22,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
 
     return (
         <S.LayoutContainer>
-            <Sidebar $isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+            <Sidebar/>
             <S.MainContent>
                 {children}
             </S.MainContent>

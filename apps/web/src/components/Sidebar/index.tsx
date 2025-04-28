@@ -10,17 +10,17 @@ import {
 } from 'next/navigation';
 
 import Link from 'next/link';
-import Image from 'next/image';
 
 import {
-    X,
     Home,
     MessageSquare,
     Trophy,
     Users,
     HelpCircle,
     Calendar,
-    User
+    User,
+    ChevronLeft,
+    ChevronRight
 } from 'lucide-react';
 
 import * as S from './styles';
@@ -28,16 +28,14 @@ import * as S from './styles';
 import {
     matchStatus
 } from '@/lib/mock-data';
-import { 
-    useAuth 
+import {
+    useAuth
 } from '@/hooks/useAuth';
-interface SidebarProps {
-    $isOpen: boolean
-    onClose: () => void
-};
 
-export function Sidebar({ $isOpen, onClose }: SidebarProps) {
+export function Sidebar() {
+    const [isCollapsed, setIsCollapsed] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
+
     const pathname = usePathname();
     const { user, isAuthenticated } = useAuth();
 
@@ -45,9 +43,25 @@ export function Sidebar({ $isOpen, onClose }: SidebarProps) {
 
     useEffect(() => {
         setIsMounted(true);
-    }, []);
+
+        const handleResize = () => {
+            if (window.innerWidth <= 768 && !isCollapsed) {
+                setIsCollapsed(true);
+            };
+        };
+
+        handleResize();
+
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, [isCollapsed]);
 
     if (!isMounted) return null;
+
+    const toggleCollapse = () => {
+        setIsCollapsed(!isCollapsed)
+    };
 
     const navItems = [
         { path: '/', label: 'HOME', icon: <Home size={18} /> },
@@ -59,51 +73,47 @@ export function Sidebar({ $isOpen, onClose }: SidebarProps) {
     ];
 
     return (
-        <>
-            <S.SidebarContainer $isOpen={$isOpen}>
-                <S.SidebarHeader>
-                    <S.Logo src='/icon-gold.png' alt='FURIA' />
+        <S.SidebarContainer $isCollapsed={isCollapsed}>
+            <S.SidebarHeader>
+                <S.Logo src='/icon-gold.png' alt='FURIA' $isCollapsed={isCollapsed} />
+                {!isCollapsed && (
                     <S.Text>FURIA <span>ZONE</span></S.Text>
-                    <S.CloseButton onClick={onClose} aria-label='Close sidebar'>
-                        <X size={24} />
-                    </S.CloseButton>
-                </S.SidebarHeader>
-                <S.NavList>
-                    {navItems.map((item) => (
-                        <Link href={item.path} passHref key={item.path} onClick={onClose}>
-                            <div style={{ textDecoration: 'none', color: 'inherit' }}>
-                                <S.NavItem $isActive={pathname === item.path}>
-                                    <S.NavIcon>{item.icon}</S.NavIcon>
-                                    <S.NavText>
-                                        {item.label}
-                                        {item.showLiveIndicator && <S.LiveIndicator />}
-                                    </S.NavText>
-                                </S.NavItem>
-                            </div>
-                        </Link>
-                    ))}
-                </S.NavList>
-                <S.UserSection>
-                    {isAuthenticated && user ? (
-                        <S.UserInfo href='/profile'>
-                            <S.UserAvatar>
-                                {user.avatar ? (
-                                    <Image src={user.avatar} alt={user.username} width={32} height={32} />
-                                ) : (
-                                    <User size={18} />
-                                )}
-                            </S.UserAvatar>
-                            <S.UserName $isModerator={user.isModerator}>{user.username}</S.UserName>
-                        </S.UserInfo>
-                    ) : (
-                        <S.LoginButton href='/auth/login'>
-                            <User size={16} />
-                            LOG IN
-                        </S.LoginButton>
-                    )}
-                </S.UserSection>
-            </S.SidebarContainer>
-            <S.Overlay $isOpen={$isOpen} onClick={onClose} />
-        </>
-    );
+                )}
+            </S.SidebarHeader>
+
+            <S.CollapseButton onClick={toggleCollapse} aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}>
+                {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+            </S.CollapseButton>
+
+            <S.NavList>
+                {navItems.map((item) => (
+                    <Link href={item.path} key={item.path}>
+                        <S.NavItem $isActive={pathname === item.path} $isCollapsed={isCollapsed}>
+                            <S.NavIcon $isCollapsed={isCollapsed}>{item.icon}</S.NavIcon>
+                            <S.NavText $isCollapsed={isCollapsed}>
+                                {item.label}
+                                {item.showLiveIndicator && <S.LiveIndicator />}
+                            </S.NavText>
+                        </S.NavItem>
+                    </Link>
+                ))}
+            </S.NavList>
+
+            <S.UserSection $isCollapsed={isCollapsed}>
+                {isAuthenticated && user ? (
+                    <S.UserInfo href='/profile'>
+                        <S.UserAvatar>
+                            <User size={18} />
+                        </S.UserAvatar>
+                        {!isCollapsed && <S.UserName>{user.username}</S.UserName>}
+                    </S.UserInfo>
+                ) : (
+                    <S.LoginButton href='/auth/login' $isCollapsed={isCollapsed}>
+                        <User size={16} />
+                        {!isCollapsed && 'LOG IN'}
+                    </S.LoginButton>
+                )}
+            </S.UserSection>
+        </S.SidebarContainer>
+    )
 };
