@@ -17,6 +17,22 @@ interface Message {
     timestamp: string;
 };
 
+interface User {
+    id: string;
+    name: string;
+    email: string;
+    username: string;
+    avatar: string;
+    isModerator: boolean;
+    createdAt: Date;
+}
+
+interface Credential {
+    userId: string;
+    email: string;
+    password: string;
+}
+
 async function fetchApi<T>(endpoint: string, options: RequestInit = {}): Promise<ApiResponse<T>> {
     try {
         const response = await fetch(`${API_BASE_URL}${endpoint}`, {
@@ -54,10 +70,61 @@ export const apiService = {
     getMessages: async () => {
         return fetchApi('/chat/messages');
     },
+    
     postMessage: async (message: Message) => {
         return fetchApi('/chat/messages', {
             method: 'POST',
             body: JSON.stringify({ ...message }),
+        });
+    },
+    
+    login: async (email: string, password: string) => {
+        return fetchApi<User>('/auth/login', {
+            method: 'POST',
+            body: JSON.stringify({ email, password }),
+        });
+    },
+    
+    register: async (name: string, email: string, username: string, password: string) => {
+        return fetchApi<User>('/auth/register', {
+            method: 'POST',
+            body: JSON.stringify({ name, email, username, password }),
+        });
+    },
+    
+    saveCredential: async (credential: Credential) => {
+        return fetchApi('/credentials', {
+            method: 'POST',
+            body: JSON.stringify(credential),
+        });
+    },
+    
+    checkEmailExists: async (email: string) => {
+        return fetchApi<boolean>('/credentials/check-email', {
+            method: 'POST',
+            body: JSON.stringify({ email }),
+        });
+    },
+    
+    checkUsernameExists: async (username: string) => {
+        return fetchApi<boolean>('/users/check-username', {
+            method: 'POST',
+            body: JSON.stringify({ username }),
+        });
+    },
+    
+    getAllUsers: async () => {
+        return fetchApi<User[]>('/users');
+    },
+    
+    getAllCredentials: async () => {
+        return fetchApi<Credential[]>('/credentials');
+    },
+    
+    saveUser: async (user: User) => {
+        return fetchApi<User>('/users', {
+            method: 'POST',
+            body: JSON.stringify(user),
         });
     },
 }; 

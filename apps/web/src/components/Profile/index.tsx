@@ -51,7 +51,7 @@ export function UserProfile() {
             <S.ProfileHeader>
                 <S.AvatarContainer>
                     <Image
-                        src={user?.avatar || '/placeholder.svg?height=120&width=120'}
+                        src={user?.avatar || '/default-user.svg'}
                         alt={user?.username || 'User'}
                         fill
                         style={{ objectFit: 'cover' }}
@@ -76,7 +76,7 @@ export function UserProfile() {
                         </S.MetaItem>
                         <S.MetaItem>
                             <Calendar size={14} />
-                            Member since {user?.createdAt.toLocaleDateString()}
+                            Member since {user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}
                         </S.MetaItem>
                     </S.ProfileMeta>
 

@@ -8,7 +8,8 @@ import React, {
 
 import {
     Send,
-    Smile
+    Smile,
+    RefreshCw
 } from 'lucide-react';
 
 import moment from 'moment';
@@ -63,6 +64,7 @@ export function ChatInterface() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [newMessage, setNewMessage] = useState('');
     const [loading, setLoading] = useState(true);
+    const [sending, setSending] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
     
     const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -73,28 +75,29 @@ export function ChatInterface() {
         setIsMounted(true);
     }, []);
 
-    useEffect(() => {
-        async function fetchMessages() {
-            try {
-                const response = await apiService.getMessages() as ApiResponse;
-                if (response.error) {
-                    throw new Error(response.error);
-                };
-
-                const messagesWithMoment = response.data.map(apiMessage => ({
-                    id: apiMessage.id,
-                    user: apiMessage.user,
-                    content: apiMessage.content,
-                    timestamp: moment(apiMessage.timestamp)
-                }));
-                setMessages(messagesWithMoment);
-            } catch (err) {
-                console.error('Error fetching messages:', err);
-            } finally {
-                setLoading(false);
+    const fetchMessages = async () => {
+        setLoading(true);
+        try {
+            const response = await apiService.getMessages() as ApiResponse;
+            if (response.error) {
+                throw new Error(response.error);
             };
-        };
 
+            const messagesWithMoment = response.data.map(apiMessage => ({
+                id: apiMessage.id,
+                user: apiMessage.user,
+                content: apiMessage.content,
+                timestamp: moment(apiMessage.timestamp)
+            }));
+            setMessages(messagesWithMoment);
+        } catch (err) {
+            console.error('Error fetching messages:', err);
+        } finally {
+            setLoading(false);
+        };
+    };
+
+    useEffect(() => {
         fetchMessages();
     }, []);
 
@@ -106,15 +109,17 @@ export function ChatInterface() {
 
     const handleSendMessage = async () => {
         if (newMessage.trim() === '') return;
+        if (!user) return;
 
+        setSending(true);
         try {
             const apiMessage: ApiMessage = {
                 id: moment().toISOString(),
                 user: {
-                    id: 'current-user',
-                    name: 'You',
-                    avatar: '/default-user.svg',
-                    isModerator: false,
+                    id: user.id,
+                    name: user.name,
+                    avatar: user.avatar,
+                    isModerator: user.isModerator,
                 },
                 content: newMessage,
                 timestamp: moment().toISOString(),
@@ -132,18 +137,12 @@ export function ChatInterface() {
             };
             setMessages(prev => [...prev, optimisticMessage]);
 
-            const messagesResponse = await apiService.getMessages() as ApiResponse;
-            if (!messagesResponse.error) {
-                const messagesWithMoment = messagesResponse.data.map(apiMessage => ({
-                    id: apiMessage.id,
-                    user: apiMessage.user,
-                    content: apiMessage.content,
-                    timestamp: moment(apiMessage.timestamp)
-                }));
-                setMessages(messagesWithMoment);
-            };
+            // Refresh messages after sending
+            await fetchMessages();
         } catch (err) {
             console.error('Error sending message:', err);
+        } finally {
+            setSending(false);
         };
     };
 
@@ -158,12 +157,19 @@ export function ChatInterface() {
             <S.ChatHeader>
                 <S.ChatTitle>FURIA FAN CHAT</S.ChatTitle>
                 <S.OnlineCount>245 fans online</S.OnlineCount>
+                <S.RefreshButton onClick={fetchMessages} aria-label='Refresh messages'>
+                    <RefreshCw size={16} />
+                </S.RefreshButton>
             </S.ChatHeader>
 
             <S.MessagesContainer>
-                {!loading && messages.map((message) => (
-                    <ChatMessage key={message.id} message={message} />
-                ))}
+                {loading ? (
+                    <S.LoadingMessage>Loading messages...</S.LoadingMessage>
+                ) : (
+                    messages.map((message) => (
+                        <ChatMessage key={message.id} message={message} />
+                    ))
+                )}
                 <div ref={messagesEndRef} />
             </S.MessagesContainer>
 
@@ -175,11 +181,12 @@ export function ChatInterface() {
                         value={newMessage}
                         onChange={(e) => setNewMessage(e.target.value)}
                         onKeyDown={handleKeyDown}
+                        disabled={sending}
                     />
                     <S.IconButton aria-label='Add emoji'>
                         <Smile size={20} />
                     </S.IconButton>
-                    <S.SendButton onClick={handleSendMessage} aria-label='Send message'>
+                    <S.SendButton onClick={handleSendMessage} aria-label='Send message' disabled={sending}>
                         <Send size={20} />
                     </S.SendButton>
                 </S.InputContainer>

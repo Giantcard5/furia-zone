@@ -10,6 +10,7 @@ import {
 } from 'next/navigation';
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 import {
     X,
@@ -84,14 +85,18 @@ export function Sidebar({ $isOpen, onClose }: SidebarProps) {
                 </S.NavList>
                 <S.UserSection>
                     {isAuthenticated && user ? (
-                        <S.UserInfo href="/profile">
+                        <S.UserInfo href='/profile'>
                             <S.UserAvatar>
-                                <User size={18} />
+                                {user.avatar ? (
+                                    <Image src={user.avatar} alt={user.username} width={32} height={32} />
+                                ) : (
+                                    <User size={18} />
+                                )}
                             </S.UserAvatar>
-                            <S.UserName>{user.username}</S.UserName>
+                            <S.UserName $isModerator={user.isModerator}>{user.username}</S.UserName>
                         </S.UserInfo>
                     ) : (
-                        <S.LoginButton href="/auth/login">
+                        <S.LoginButton href='/auth/login'>
                             <User size={16} />
                             LOG IN
                         </S.LoginButton>

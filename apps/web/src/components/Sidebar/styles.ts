@@ -156,8 +156,8 @@ const UserInfo = styled(Link)`
 `;
 
 const UserAvatar = styled.div`
-    width: 32px;
-    height: 32px;
+    width: 2.4rem;
+    height: 2.4rem;
     border-radius: 50%;
     background-color: rgba(212, 175, 55, 0.1);
     display: flex;
@@ -165,10 +165,11 @@ const UserAvatar = styled.div`
     justify-content: center;
 `;
 
-const UserName = styled.div`
+const UserName = styled.div<{ $isModerator?: boolean }>`
     font-family: 'Space Mono', monospace;
     font-size: 0.875rem;
     letter-spacing: 0.05em;
+    color: ${({ theme, $isModerator }) => $isModerator ? theme.colors.text.gold : 'white'};
 `;
 
 const LoginButton = styled(Link)`

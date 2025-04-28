@@ -51,4 +51,9 @@ export class ChatService {
             throw new Error('Failed to read messages');
         };
     };
+
+    // New method to check if a user is logged in
+    isUserLoggedIn(user: User): boolean {
+        return !!user.id;
+    };
 };

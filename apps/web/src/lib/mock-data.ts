@@ -1014,22 +1014,16 @@ export const mockUsers = [
         name: 'Andrei Piovezan',
         email: 'art@furia.com',
         username: 'ArT',
-        avatar: '/placeholder.svg?height=40&width=40',
+        avatar: '/players/art.webp',
         isModerator: true,
         createdAt: new Date('2022-01-01'),
-    },
-    {
-        id: 'user2',
-        email: 'demo@example.com',
-        name: 'Demo User',
-        username: 'FuriaFan123',
-        avatar: '/placeholder.svg?height=40&width=40',
-        isModerator: false,
-        createdAt: new Date('2023-05-15'),
-    },
+    }
 ];
 
 export const mockCredentials = [
-    { email: 'art@furia.com', password: 'password123', userId: 'user1' },
-    { email: 'demo@example.com', password: 'demo123', userId: 'user2' },
+    { 
+        email: 'art@furia.com', 
+        password: 'password123', 
+        userId: 'user1' 
+    }
 ];

@@ -77,14 +77,64 @@ const IconButton = styled.button`
     }
 `;
 
-const SendButton = styled(IconButton)`
-    background-color: ${({ theme }) => theme.colors.primary};
-    color: black;
-    
+const SendButton = styled.button`
+    background: ${({ theme }) => theme.colors.primary};
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
     &:hover {
-        background-color: #E5C158;
-        color: black;
+        background: ${({ theme }) => theme.colors.accent};
+        transform: scale(1.05);
     }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+    }
+`;
+
+const RefreshButton = styled.button`
+    background: transparent;
+    color: ${({ theme }) => theme.colors.text};
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    margin-left: 8px;
+
+    &:hover {
+        color: ${({ theme }) => theme.colors.primary};
+        transform: rotate(180deg);
+    }
+`;
+
+const LoadingMessage = styled.div`
+    color: ${({ theme }) => theme.colors.text};
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+`;
+
+const EmptyMessage = styled.div`
+    color: ${({ theme }) => theme.colors.text};
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    opacity: 0.7;
 `;
 
 const OnlineCount = styled.div`
@@ -103,5 +153,8 @@ export {
     MessageInput,
     IconButton,
     SendButton,
+    RefreshButton,
+    LoadingMessage,
+    EmptyMessage,
     OnlineCount
 };
