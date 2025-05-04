@@ -234,19 +234,23 @@ export function PlayerDetail() {
 
                     {activeTab === 'achievements' && (
                         <S.AchievementsList>
-                            {player.achievements.map((achievement, index) => (
-                                <S.AchievementItem key={index}>
-                                    <S.AchievementIcon>
-                                        <Trophy size={20} />
-                                    </S.AchievementIcon>
-                                    <S.AchievementInfo>
-                                        <S.AchievementTitle>{achievement.event.name}</S.AchievementTitle>
-                                        <S.AchievementMeta>
-                                            <span>{achievement.place}</span>
-                                        </S.AchievementMeta>
-                                    </S.AchievementInfo>
-                                </S.AchievementItem>
-                            ))}
+                            {player.achievements.length > 0 ? (
+                                player.achievements.map((achievement, index) => (
+                                    <S.AchievementItem key={index}>
+                                        <S.AchievementIcon>
+                                            <Trophy size={20} />
+                                        </S.AchievementIcon>
+                                        <S.AchievementInfo>
+                                            <S.AchievementTitle>{achievement.event.name}</S.AchievementTitle>
+                                            <S.AchievementMeta>
+                                                <span>{achievement.place}</span>
+                                            </S.AchievementMeta>
+                                        </S.AchievementInfo>
+                                    </S.AchievementItem>
+                                ))
+                            ) : (
+                                <S.PlayerBio>No achievement yet!</S.PlayerBio>
+                            )}
                         </S.AchievementsList>
                     )}
 
