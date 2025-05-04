@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "yarn build:web",
+  "buildCommand": "yarn build",
   "outputDirectory": ".next",
   "framework": "nextjs",
   "regions": ["iad1"],
@@ -36,10 +36,10 @@
       ]
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "https://api.furia-zone.vercel.app/api/$1"
+      "source": "/api/:path*",
+      "destination": "https://api.furia-zone.vercel.app/api/:path*"
     }
   ]
 } 

@@ -1,8 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "yarn build:api",
+  "buildCommand": "yarn build",
   "outputDirectory": "dist",
-  "framework": "nodejs",
   "regions": ["iad1"],
   "headers": [
     {
@@ -23,10 +22,10 @@
       ]
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/dist/index.js"
+      "source": "/api/:path*",
+      "destination": "/dist/index.js"
     }
   ]
 } 
