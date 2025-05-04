@@ -1,4 +1,4 @@
-# 🖤 FURIA Fan Zone - Technical Documentation
+# 🖤 FURIA Zone - Technical Documentation
 
 A modern real-time web application developed to connect fans of the **FURIA** esports team. It offers a fully interactive experience with live chat, real-time match tracking, and more — all designed to strengthen the FURIA community.
 
