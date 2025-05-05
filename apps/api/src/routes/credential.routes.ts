@@ -15,7 +15,7 @@ const credentialService = new CredentialService();
 router.post('/', async (req: Request, res: Response) => {
     try {
         const credential = req.body;
-        await credentialService.saveCredential(credential);
+        await credentialService.createCredential(credential);
         res.status(201).json({ message: 'Credential saved successfully' });
     } catch (error) {
         res.status(500).json({ error: 'Failed to save credential' });

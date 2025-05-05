@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/@prisma/client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String        @id @db.VarChar(255)
+  name         String        @db.VarChar(255)
+  email        String        @unique(map: "email") @db.VarChar(255)
+  username     String        @unique(map: "username") @db.VarChar(255)
+  avatar       String?       @db.Text
+  is_moderator Boolean?      @default(false)
+  created_at   DateTime      @db.Timestamp(0)
+  ChatMessage  ChatMessage[]
+  Credentials  Credentials?
+}
+
+model Credentials {
+  user_id  String @id @db.VarChar(255)
+  email    String @unique(map: "email") @db.VarChar(255)
+  password String @db.VarChar(255)
+  User     User   @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "Credentials_ibfk_1")
+}
+
+model ChatMessage {
+  id        String   @id @db.VarChar(255)
+  content   String   @db.Text
+  timestamp DateTime @db.Timestamp(0)
+  user_id   String?  @db.VarChar(255)
+  User      User?    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "ChatMessage_ibfk_1")
+
+  @@index([user_id], map: "user_id")
+}

@@ -14,7 +14,7 @@ const userService = new UserService();
 router.post('/', async (req: Request, res: Response) => {
     try {
         const user = req.body;
-        await userService.saveUser(user);
+        await userService.createUser(user);
         res.status(201).json({ message: 'User saved successfully' });
     } catch (error) {
         res.status(500).json({ error: 'Failed to save user' });

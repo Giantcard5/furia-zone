@@ -1,5 +1,6 @@
-import fs from 'fs';
-import path from 'path';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 interface User {
     id: string;
@@ -16,44 +17,62 @@ interface Message {
 }
 
 export class ChatService {
-    private readonly messagesFilePath: string;
-
-    constructor() {
-        this.messagesFilePath = path.join(__dirname, '../../data/chat_messages.json');
-        this.ensureMessagesFileExists();
-    };
-
-    private ensureMessagesFileExists(): void {
-        const dirPath = path.dirname(this.messagesFilePath);
-        if (!fs.existsSync(dirPath)) {
-            fs.mkdirSync(dirPath, { recursive: true });
-        }
-        if (!fs.existsSync(this.messagesFilePath)) {
-            fs.writeFileSync(this.messagesFilePath, JSON.stringify([]));
-        };
-    };
-
-    async saveMessage(message: Message): Promise<void> {
+    async saveMessage(message: any): Promise<boolean> {
+        console.log(message);
         try {
-            const messages = await this.getAllMessages();
-            messages.push(message);
-            fs.writeFileSync(this.messagesFilePath, JSON.stringify(messages, null, 2));
+            await prisma.chatMessage.create({
+                data: {
+                    id: Math.random().toString(36).substring(2, 15),
+                    user_id: '1',
+                    content: 'Default message',
+                    timestamp: new Date(),
+                }
+            })
+
+            return true;
         } catch (error) {
             throw new Error('Failed to save message');
-        };
-    };
+        }
+    }
 
     async getAllMessages(): Promise<Message[]> {
         try {
-            const data = fs.readFileSync(this.messagesFilePath, 'utf-8');
-            return JSON.parse(data);
-        } catch (error) {
-            throw new Error('Failed to read messages');
-        };
-    };
+            const messages = await prisma.chatMessage.findMany({
+                orderBy: { timestamp: 'asc' },
+                include: { User: true },
+            });
 
-    // New method to check if a user is logged in
-    isUserLoggedIn(user: User): boolean {
-        return !!user.id;
-    };
-};
+            return messages.map((msg: any) => ({
+                id: msg.id,
+                content: msg.content,
+                timestamp: msg.timestamp.toISOString(),
+                user: {
+                    id: msg.User?.id || '',
+                    name: msg.User?.name || '',
+                    avatar: msg.User?.avatar || '',
+                    isModerator: msg.User?.is_moderator || false
+                }
+            }));
+        } catch (error) {
+            throw new Error('Failed to get all messages');
+        }
+    }
+
+    async isUserLoggedIn(userLoggedIn: string): Promise<boolean> {
+        try {
+            if (userLoggedIn === '') {
+                console.error('Usuário não fornecido ou sem ID');
+                return false;
+            }
+
+            const user = await prisma.user.findUnique({
+                where: { id: userLoggedIn },
+            });
+
+            return user !== null;
+        } catch (error) {
+            console.error('Erro no isUserLoggedIn:', error);
+            throw new Error('Failed to check if user is logged in');
+        }
+    }
+}

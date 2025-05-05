@@ -15,7 +15,7 @@ const chatService = new ChatService();
 router.post('/messages', async (req: Request, res: Response) => {
     try {
         const message = req.body;
-        if (!chatService.isUserLoggedIn(message.user)) {
+        if (!chatService.isUserLoggedIn(message.userId)) {
             return res.status(401).json({ error: 'User must be logged in to send a message' });
         }
         await chatService.saveMessage(message);

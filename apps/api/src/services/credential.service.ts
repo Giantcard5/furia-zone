@@ -1,5 +1,6 @@
-import fs from 'fs';
-import path from 'path';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 interface Credential {
     userId: string;
@@ -8,39 +9,34 @@ interface Credential {
 }
 
 export class CredentialService {
-    private readonly credentialsFilePath: string;
-
-    constructor() {
-        this.credentialsFilePath = path.join(__dirname, '../../data/credentials.json');
-        this.ensureCredentialsFileExists();
-    }
-
-    private ensureCredentialsFileExists(): void {
-        const dirPath = path.dirname(this.credentialsFilePath);
-        if (!fs.existsSync(dirPath)) {
-            fs.mkdirSync(dirPath, { recursive: true });
-        }
-        if (!fs.existsSync(this.credentialsFilePath)) {
-            fs.writeFileSync(this.credentialsFilePath, JSON.stringify([]));
-        }
-    }
-
-    async saveCredential(credential: Credential): Promise<void> {
-        try {
-            const credentials = await this.getAllCredentials();
-            credentials.push(credential);
-            fs.writeFileSync(this.credentialsFilePath, JSON.stringify(credentials, null, 2));
-        } catch (error) {
-            throw new Error('Failed to save credential');
-        }
-    }
-
     async getAllCredentials(): Promise<Credential[]> {
         try {
-            const data = fs.readFileSync(this.credentialsFilePath, 'utf-8');
-            return JSON.parse(data);
+            const credentials = await prisma.credentials.findMany({
+                include: { User: true },
+            });
+
+            return credentials.map((cred: any) => ({
+                userId: cred.userId,
+                email: cred.email,
+                password: cred.password,
+            }));
         } catch (error) {
-            throw new Error('Failed to read credentials');
+            throw new Error('Failed to get all credentials');
+        }
+    }
+
+    async createCredential(credential: any): Promise<void> {
+        console.log(credential);
+        try {
+            await prisma.credentials.create({
+                data: {
+                    user_id: credential.user_id,
+                    email: credential.email,
+                    password: credential.password,
+                },
+            });
+        } catch (error) {
+            throw new Error('Failed to create credentials');
         }
     }
 } 

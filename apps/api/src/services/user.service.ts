@@ -1,5 +1,6 @@
-import fs from 'fs';
-import path from 'path';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 interface User {
     id: string;
@@ -12,58 +13,65 @@ interface User {
 };
 
 export class UserService {
-    private readonly usersFilePath: string;
-
-    constructor() {
-        this.usersFilePath = path.join(__dirname, '../../data/users.json');
-        this.ensureUsersFileExists();
-    }
-
-    private ensureUsersFileExists(): void {
-        const dirPath = path.dirname(this.usersFilePath);
-        if (!fs.existsSync(dirPath)) {
-            fs.mkdirSync(dirPath, { recursive: true });
-        }
-        if (!fs.existsSync(this.usersFilePath)) {
-            fs.writeFileSync(this.usersFilePath, JSON.stringify([]));
-        }
-    }
-
-    async saveUser(user: User): Promise<void> {
-        try {
-            const users = await this.getAllUsers();
-            users.push(user);
-            fs.writeFileSync(this.usersFilePath, JSON.stringify(users, null, 2));
-        } catch (error) {
-            throw new Error('Failed to save user');
-        }
-    }
-
     async getAllUsers(): Promise<User[]> {
         try {
-            const data = fs.readFileSync(this.usersFilePath, 'utf-8');
-            return JSON.parse(data);
+            const users = await prisma.user.findMany();
+
+            return users.map((user: any) => ({
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                username: user.username,
+                avatar: user.avatar,
+                isModerator: user.is_moderator,
+                createdAt: user.created_at,
+            }));
         } catch (error) {
-            throw new Error('Failed to read users');
+            throw new Error('Failed to get all users');
         }
     }
 
     async updateUser(userId: string, updatedUser: User): Promise<void> {
         try {
-            const users = await this.getAllUsers();
-            const userIndex = users.findIndex(user => user.id === userId);
-            
-            if (userIndex === -1) {
+            const existingUser = await prisma.user.findUnique({
+                where: { id: userId },
+            });
+
+            if (!existingUser) {
                 throw new Error('User not found');
             }
-            
-            updatedUser.id = userId;
-            updatedUser.createdAt = users[userIndex].createdAt;
-            
-            users[userIndex] = updatedUser;
-            fs.writeFileSync(this.usersFilePath, JSON.stringify(users, null, 2));
+
+            await prisma.user.update({
+                where: { id: userId },
+                data: {
+                    name: updatedUser.name,
+                    email: updatedUser.email,
+                    username: updatedUser.username,
+                    avatar: updatedUser.avatar,
+                    is_moderator: updatedUser.isModerator,
+                },
+            });
         } catch (error) {
             throw new Error('Failed to update user');
+        }
+    }
+
+    async createUser(newUser: User): Promise<void> {
+        console.log(newUser);
+        try {
+            await prisma.user.create({
+                data: {
+                    id: newUser.id,
+                    name: newUser.name,
+                    email: newUser.email,
+                    username: newUser.username,
+                    avatar: newUser.avatar,
+                    is_moderator: newUser.isModerator,
+                    created_at: newUser.createdAt,
+                },
+            });
+        } catch (error) {
+            throw new Error('Failed to create user');
         }
     }
 } 
