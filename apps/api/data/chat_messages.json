@@ -20,5 +20,16 @@
     },
     "content": "Salve Salve Professor!",
     "timestamp": "2025-04-28T00:21:28.213Z"
+  },
+  {
+    "id": "1",
+    "user": {
+      "id": "user1",
+      "name": "FalleN",
+      "avatar": "/players/fallen.webp",
+      "isModerator": true
+    },
+    "content": "Teste",
+    "timestamp": "2023-04-14T14:30:00Z"
   }
 ]
