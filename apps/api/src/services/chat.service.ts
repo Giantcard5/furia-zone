@@ -18,19 +18,19 @@ interface Message {
 
 export class ChatService {
     async saveMessage(message: any): Promise<boolean> {
-        console.log(message);
         try {
             await prisma.chatMessage.create({
                 data: {
-                    id: Math.random().toString(36).substring(2, 15),
-                    user_id: '1',
-                    content: 'Default message',
+                    id: message.id,
+                    user_id: message.user.id,
+                    content: message.content,
                     timestamp: new Date(),
                 }
             })
 
             return true;
         } catch (error) {
+            console.error('[saveMessage] DB Error:', error);
             throw new Error('Failed to save message');
         }
     }
@@ -49,11 +49,12 @@ export class ChatService {
                 user: {
                     id: msg.User?.id || '',
                     name: msg.User?.name || '',
-                    avatar: msg.User?.avatar || '',
+                    avatar: msg.User?.avatar || '/default-user.svg',
                     isModerator: msg.User?.is_moderator || false
                 }
             }));
         } catch (error) {
+            console.error('[getAllMessages] DB Error:', error);
             throw new Error('Failed to get all messages');
         }
     }
@@ -71,7 +72,7 @@ export class ChatService {
 
             return user !== null;
         } catch (error) {
-            console.error('Erro no isUserLoggedIn:', error);
+            console.error('[isUserLoggedIn] DB Error:', error);
             throw new Error('Failed to check if user is logged in');
         }
     }

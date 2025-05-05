@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://furia-zone-app-api.vercel.app/api';
+const API_BASE_URL = 'http://localhost:3001/api';
 
 interface ApiResponse<T> {
     data: T;
@@ -75,20 +75,6 @@ export const apiService = {
         return fetchApi('/chat/messages', {
             method: 'POST',
             body: JSON.stringify({ ...message }),
-        });
-    },
-    
-    login: async (email: string, password: string) => {
-        return fetchApi<User>('/auth/login', {
-            method: 'POST',
-            body: JSON.stringify({ email, password }),
-        });
-    },
-    
-    register: async (name: string, email: string, username: string, password: string) => {
-        return fetchApi<User>('/auth/register', {
-            method: 'POST',
-            body: JSON.stringify({ name, email, username, password }),
         });
     },
     

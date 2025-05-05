@@ -53,6 +53,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         try {            
             const credentialsResponse = await apiService.getAllCredentials();
+
             if (credentialsResponse.error) {
                 setIsLoading(false);
                 return false;
@@ -62,6 +63,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             const credential = credentials.find(
                 (cred) => cred.email.toLowerCase() === email.toLowerCase() && cred.password === password,
             );
+
             if (credential) {
                 const usersResponse = await apiService.getAllUsers();
                 if (usersResponse.error) {
@@ -70,7 +72,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 };
                 
                 const users = usersResponse.data;                
-                const foundUser = users.find((u) => u.id === credential.userId);                
+                const foundUser = users.find((u) => u.id === credential.userId);
                 if (foundUser) {
                     setUser(foundUser);
                     localStorage.setItem('furiaUser', JSON.stringify(foundUser));
@@ -115,7 +117,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             };
 
             const newUser: User = {
-                id: `user${users.length + 1}`,
+                id: `${users.length + 1}`,
                 name,
                 email,
                 username,

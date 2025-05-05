@@ -22,11 +22,12 @@ export class UserService {
                 name: user.name,
                 email: user.email,
                 username: user.username,
-                avatar: user.avatar,
+                avatar: '/default-user.svg',
                 isModerator: user.is_moderator,
                 createdAt: user.created_at,
             }));
         } catch (error) {
+            console.error('[getAllUsers] DB Error:', error);
             throw new Error('Failed to get all users');
         }
     }
@@ -47,17 +48,17 @@ export class UserService {
                     name: updatedUser.name,
                     email: updatedUser.email,
                     username: updatedUser.username,
-                    avatar: updatedUser.avatar,
+                    avatar: '/default-user.svg',
                     is_moderator: updatedUser.isModerator,
                 },
             });
         } catch (error) {
+            console.error('[updateUser] DB Error:', error);
             throw new Error('Failed to update user');
         }
     }
 
     async createUser(newUser: User): Promise<void> {
-        console.log(newUser);
         try {
             await prisma.user.create({
                 data: {
@@ -65,12 +66,13 @@ export class UserService {
                     name: newUser.name,
                     email: newUser.email,
                     username: newUser.username,
-                    avatar: newUser.avatar,
+                    avatar: '/default-user.svg',
                     is_moderator: newUser.isModerator,
-                    created_at: newUser.createdAt,
+                    created_at: new Date(),
                 },
             });
         } catch (error) {
+            console.error('[createUser] DB Error:', error);
             throw new Error('Failed to create user');
         }
     }
