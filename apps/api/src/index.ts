@@ -1,34 +1,36 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
+import express from 'express'
+import cors from 'cors'
+import helmet from 'helmet'
+import dotenv from 'dotenv'
 
-import { 
-    hltvRouter 
+import {
+    hltvRouter
 } from './routes/hltv.routes';
-import { 
-    chatRouter 
+import {
+    chatRouter
 } from './routes/chat.routes';
-import { 
-    userRouter 
+import {
+    userRouter
 } from './routes/user.routes';
-import { 
-    credentialRouter 
+import {
+    credentialRouter
 } from './routes/credential.routes';
+dotenv.config()
 
-dotenv.config();
+const app = express()
 
-const app = express();
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}))
 
-app.use(express.json());
-app.use(cors());
+app.use(helmet())
+app.use(express.json())
 
-app.use('/api/hltv', hltvRouter);
-app.use('/api/chat', chatRouter);
-app.use('/api/users', userRouter);
-app.use('/api/credentials', credentialRouter);
+app.use('/api/chat', chatRouter)
+app.use('/api/hltv', hltvRouter)
+app.use('/api/users', userRouter)
+app.use('/api/credentials', credentialRouter)
 
-app.get('/', (req, res) => {
-    res.json({ message: 'FURIA ZONE API is running' });
-});
-
-export default app;
+export default app
