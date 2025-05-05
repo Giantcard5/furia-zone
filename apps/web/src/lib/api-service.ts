@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.API_BASE_URL;
+const API_BASE_URL = 'https://furia-zone-api.vercel.app/api';
 
 interface ApiResponse<T> {
     data: T;
