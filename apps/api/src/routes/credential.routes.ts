@@ -5,17 +5,17 @@ import {
 } from 'express';
 
 import { 
-    CredentialService 
+    createCredential,
+    getAllCredentials 
 } from '../services/credential.service';
 
 const router = Router();
-const credentialService = new CredentialService();
 
 // Save a new credential
 router.post('/', async (req: Request, res: Response) => {
     try {
         const credential = req.body;
-        await credentialService.saveCredential(credential);
+        await createCredential(credential);
         res.status(201).json({ message: 'Credential saved successfully' });
     } catch (error) {
         res.status(500).json({ error: 'Failed to save credential' });
@@ -25,7 +25,7 @@ router.post('/', async (req: Request, res: Response) => {
 // Get all credentials
 router.get('/', async (req: Request, res: Response) => {
     try {
-        const credentials = await credentialService.getAllCredentials();
+        const credentials = await getAllCredentials();
         res.json(credentials);
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch credentials' });
@@ -36,7 +36,7 @@ router.get('/', async (req: Request, res: Response) => {
 router.post('/check-email', async (req: Request, res: Response) => {
     try {
         const { email } = req.body;
-        const credentials = await credentialService.getAllCredentials();
+        const credentials = await getAllCredentials();
         const emailExists = credentials.some(cred => cred.email.toLowerCase() === email.toLowerCase());
         res.json(emailExists);
     } catch (error) {

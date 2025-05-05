@@ -5,16 +5,17 @@ import {
 } from 'express';
 
 import { 
-    HltvService 
+    getMatchesStats,
+    getMatchById,
+    getTeamById,
+    getPlayerById
 } from '../services/hltv.service';
 
 const router = Router();
 
-const hltvService = new HltvService();
-
 router.get('/matches/stats/:startDate/:endDate', async (req: Request, res: Response) => {
     try {
-        const matches = await hltvService.getMatchesStats({ startDate: req.params.startDate.toString(), endDate: req.params.endDate.toString() });
+        const matches = await getMatchesStats({ startDate: req.params.startDate.toString(), endDate: req.params.endDate.toString() });
         res.json(matches);
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch matches stats' });
@@ -23,7 +24,7 @@ router.get('/matches/stats/:startDate/:endDate', async (req: Request, res: Respo
 
 router.get('/matches/:id', async (req: Request, res: Response) => { 
     try {
-        const match = await hltvService.getMatchById(Number(req.params.id));
+        const match = await getMatchById(Number(req.params.id));
         res.json(match);
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch match' });
@@ -32,7 +33,7 @@ router.get('/matches/:id', async (req: Request, res: Response) => {
 
 router.get('/teams/:id', async (req: Request, res: Response) => {
     try {
-        const team = await hltvService.getTeamById(Number(req.params.id));
+        const team = await getTeamById(Number(req.params.id));
         res.json(team);
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch team' });
@@ -41,7 +42,7 @@ router.get('/teams/:id', async (req: Request, res: Response) => {
 
 router.get('/players/:id', async (req: Request, res: Response) => {
     try {
-        const player = await hltvService.getPlayerById(Number(req.params.id));
+        const player = await getPlayerById(Number(req.params.id));
         res.json(player);
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch player' });

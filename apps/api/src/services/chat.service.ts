@@ -1,59 +1,68 @@
-import fs from 'fs';
-import path from 'path';
+import { 
+    writeFileSync, 
+    readFileSync, 
+    existsSync 
+} from 'fs';
+
+import { 
+    join 
+} from 'path';
+
+interface ChatMessage {
+    id: string;
+    username: string;
+    message: string;
+    createdAt: string;
+};
 
 interface User {
     id: string;
     name: string;
     avatar: string;
     isModerator: boolean;
-}
+};
 
-interface Message {
-    id: string;
-    user: User;
-    content: string;
-    timestamp: string;
-}
+const filePath = join(__dirname, '../../data/chat_messages.json');
 
-export class ChatService {
-    private readonly messagesFilePath: string;
+const loadMessages = (): ChatMessage[] => {
+    if (!existsSync(filePath)) return [];
+    const data = readFileSync(filePath, 'utf8');
+    return JSON.parse(data);
+};
 
-    constructor() {
-        this.messagesFilePath = path.join(__dirname, '../../data/chat_messages.json');
-        this.ensureMessagesFileExists();
-    };
+const saveMessages = (messages: ChatMessage[]) => {
+    writeFileSync(filePath, JSON.stringify(messages, null, 2));
+};
 
-    private ensureMessagesFileExists(): void {
-        const dirPath = path.dirname(this.messagesFilePath);
-        if (!fs.existsSync(dirPath)) {
-            fs.mkdirSync(dirPath, { recursive: true });
+export const createMessage = async (data: Partial<ChatMessage>) => {
+    try {
+        if (!data.id || !data.username || !data.message) {
+            throw new Error("Missing required fields");
         }
-        if (!fs.existsSync(this.messagesFilePath)) {
-            fs.writeFileSync(this.messagesFilePath, JSON.stringify([]));
-        };
-    };
 
-    async saveMessage(message: Message): Promise<void> {
-        try {
-            const messages = await this.getAllMessages();
-            messages.push(message);
-            fs.writeFileSync(this.messagesFilePath, JSON.stringify(messages, null, 2));
-        } catch (error) {
-            throw new Error('Failed to save message');
-        };
-    };
+        const messages = loadMessages();
 
-    async getAllMessages(): Promise<Message[]> {
-        try {
-            const data = fs.readFileSync(this.messagesFilePath, 'utf-8');
-            return JSON.parse(data);
-        } catch (error) {
-            throw new Error('Failed to read messages');
+        const msg: ChatMessage = {
+            id: data.id,
+            username: data.username,
+            message: data.message,
+            createdAt: data.createdAt ?? new Date().toISOString()
         };
-    };
 
-    // New method to check if a user is logged in
-    isUserLoggedIn(user: User): boolean {
-        return !!user.id;
-    };
+        messages.push(msg);
+        saveMessages(messages);
+
+        return msg;
+    } catch (err) {
+        console.error("Error saving message:", err);
+        throw new Error("Failed to save message");
+    }
+};
+
+export const getAllMessages = async () => {
+    return loadMessages();
+};
+
+export const isUserLoggedIn = async (user: User) => {
+    return !!user.id;
 };

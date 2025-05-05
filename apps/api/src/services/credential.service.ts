@@ -1,46 +1,55 @@
-import fs from 'fs';
-import path from 'path';
+import { 
+    writeFileSync, 
+    readFileSync, 
+    existsSync 
+} from 'fs';
+
+import { 
+    join 
+} from 'path';
 
 interface Credential {
     userId: string;
     email: string;
     password: string;
-}
+};
 
-export class CredentialService {
-    private readonly credentialsFilePath: string;
+const filePath = join(__dirname, '../../data/credentials.json');
 
-    constructor() {
-        this.credentialsFilePath = path.join(__dirname, '../../data/credentials.json');
-        this.ensureCredentialsFileExists();
-    }
+const loadCredentials = (): Credential[] => {
+    if (!existsSync(filePath)) return [];
+    const data = readFileSync(filePath, 'utf8');
+    return JSON.parse(data);
+};
 
-    private ensureCredentialsFileExists(): void {
-        const dirPath = path.dirname(this.credentialsFilePath);
-        if (!fs.existsSync(dirPath)) {
-            fs.mkdirSync(dirPath, { recursive: true });
+const saveCredentials = (credentials: Credential[]) => {
+    writeFileSync(filePath, JSON.stringify(credentials, null, 2));
+};
+
+export const createCredential = async (data: Partial<Credential>) => {
+    try {
+        if (!data.userId || !data.email || !data.password) {
+            throw new Error("Missing required credential fields");
         }
-        if (!fs.existsSync(this.credentialsFilePath)) {
-            fs.writeFileSync(this.credentialsFilePath, JSON.stringify([]));
-        }
-    }
 
-    async saveCredential(credential: Credential): Promise<void> {
-        try {
-            const credentials = await this.getAllCredentials();
-            credentials.push(credential);
-            fs.writeFileSync(this.credentialsFilePath, JSON.stringify(credentials, null, 2));
-        } catch (error) {
-            throw new Error('Failed to save credential');
-        }
-    }
+        const credentials = loadCredentials();
 
-    async getAllCredentials(): Promise<Credential[]> {
-        try {
-            const data = fs.readFileSync(this.credentialsFilePath, 'utf-8');
-            return JSON.parse(data);
-        } catch (error) {
-            throw new Error('Failed to read credentials');
-        }
+        const credential: Credential = {
+            userId: data.userId,
+            email: data.email,
+            password: data.password
+        };
+
+        credentials.push(credential);
+        saveCredentials(credentials);
+
+        return credential;
+    } catch (err) {
+        console.error("Error saving credential:", err);
+        throw new Error("Failed to save credential");
     }
-} 
+};
+
+export const getAllCredentials = async () => {
+    return loadCredentials();
+};
