@@ -544,8 +544,6 @@ export const mockPlayerDetails = [
         "ign": "FalleN",
         "image": "https://img-cdn.hltv.org/playerbodyshot/Wf26SO_o8nvnsLh0AqZXc5.png?ixlib=java-2.1.0&w=400&s=36b7189a4ae7b020d0acb087fd44777a",
         "age": 33,
-        "twitch": "https://www.twitch.tv/gafallen",
-        "instagram": "https://www.instagram.com/fallen",
         "country": {
             "name": "Brazil",
             "code": "BR"
@@ -1005,6 +1003,12 @@ export const mockPlayerDetails = [
                 }
             }
         ],
+        teams: [
+            {
+                id: 1,
+                name: "FURIA"
+            }
+        ]
     }
 ];
 

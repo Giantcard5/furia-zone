@@ -26,6 +26,10 @@ import {
     apiService
 } from '@/lib/api-service';
 
+import { 
+    mockPlayerDetails 
+} from '@/lib/mock-data';
+
 interface PlayerData {
     id: number;
     name: string;
@@ -41,12 +45,12 @@ interface PlayerData {
         id: number;
     };
     statistics: {
-        rating: number | null;
-        killsPerRound: string | null;
-        headshots: string | null;
-        mapsPlayed: string | null;
-        deathsPerRound: string | null;
-        roundsContributed: string | null;
+        rating: number;
+        killsPerRound: null;
+        headshots: null;
+        mapsPlayed: null;
+        deathsPerRound: null;
+        roundsContributed: null;
     };
     achievements: {
         place: string;
@@ -65,33 +69,33 @@ export function PlayerDetail() {
     const params = useParams();
     const playerId = params?.playerId ? parseInt(params.playerId as string, 10) : null;
 
-    const [player, setPlayer] = useState<PlayerData>({} as PlayerData);
+    const [player, setPlayer] = useState<PlayerData>(mockPlayerDetails[0]);
     const [activeTab, setActiveTab] = useState('statistics');
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        async function fetchPlayerData() {
-            if (!playerId || isNaN(playerId)) return;
+    // useEffect(() => {
+    //     async function fetchPlayerData() {
+    //         if (!playerId || isNaN(playerId)) return;
 
-            try {
-                setLoading(true);
-                const response = await apiService.getPlayerData(playerId);
+    //         try {
+    //             setLoading(true);
+    //             const response = await apiService.getPlayerData(playerId);
 
-                if (response.error) {
-                    throw new Error(response.error);
-                }
+    //             if (response.error) {
+    //                 throw new Error(response.error);
+    //             }
 
-                const playerData = response.data as PlayerData;
-                setPlayer(playerData);
-            } catch (err) {
-                console.error('Error fetching player data:', err);
-            } finally {
-                setLoading(false);
-            }
-        }
+    //             const playerData = response.data as PlayerData;
+    //             setPlayer(playerData);
+    //         } catch (err) {
+    //             console.error('Error fetching player data:', err);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     }
 
-        fetchPlayerData();
-    }, [playerId]);
+    //     fetchPlayerData();
+    // }, [playerId]);
 
     if (!player) {
         return (

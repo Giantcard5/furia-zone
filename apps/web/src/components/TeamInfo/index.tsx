@@ -50,45 +50,61 @@ interface ApiResponse<T> {
 export function TeamInfo() {
     const { name, logo, stats, description } = mockTeamData;
 
-    const [playersData, setPlayersData] = useState<PlayerData[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [playersData, setPlayersData] = useState<PlayerData[]>(
+        mockTeamData.players.map((player, index) => ({
+            id: parseInt(player.id) || index + 1,
+            name: player.name,
+            ign: player.nickname,
+            image: player.image,
+            type: player.role,
+            statistics: {
+                rating: 0,
+                killsPerRound: null,
+                headshots: null,
+                mapsPlayed: null,
+                deathsPerRound: null,
+                roundsContributed: null
+            }
+        }))
+    );
+    const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        async function fetchTeamData() {
-            try {
-                setLoading(true);
-                const response = await apiService.getTeamData('8297');
+    // useEffect(() => {
+    //     async function fetchTeamData() {
+    //         try {
+    //             setLoading(true);
+    //             const response = await apiService.getTeamData('8297');
 
-                if (response.error) {
-                    throw new Error(response.error);
-                };
+    //             if (response.error) {
+    //                 throw new Error(response.error);
+    //             };
 
-                const teamData = response.data as TeamData;
+    //             const teamData = response.data as TeamData;
 
-                if (teamData?.players) {
-                    const playerPromises = teamData.players.map((player: { id: number; type: string }) =>
-                        apiService.getPlayerData(player.id) as Promise<ApiResponse<PlayerData>>
-                    );
+    //             if (teamData?.players) {
+    //                 const playerPromises = teamData.players.map((player: { id: number; type: string }) =>
+    //                     apiService.getPlayerData(player.id) as Promise<ApiResponse<PlayerData>>
+    //                 );
 
-                    const playerResponses = await Promise.all(playerPromises);
-                    const validPlayerData = playerResponses
-                        .filter(response => !response.error)
-                        .map((response, index) => ({
-                            ...response.data,
-                            type: teamData.players[index].type
-                        }));
+    //                 const playerResponses = await Promise.all(playerPromises);
+    //                 const validPlayerData = playerResponses
+    //                     .filter(response => !response.error)
+    //                     .map((response, index) => ({
+    //                         ...response.data,
+    //                         type: teamData.players[index].type
+    //                     }));
 
-                    setPlayersData(validPlayerData);
-                };
-            } catch (err) {
-                console.error('Error fetching team data:', err);
-            } finally {
-                setLoading(false);
-            };
-        };
+    //                 setPlayersData(validPlayerData);
+    //             };
+    //         } catch (err) {
+    //             console.error('Error fetching team data:', err);
+    //         } finally {
+    //             setLoading(false);
+    //         };
+    //     };
 
-        fetchTeamData();
-    }, []);
+    //     fetchTeamData();
+    // }, []);
 
     return (
 
